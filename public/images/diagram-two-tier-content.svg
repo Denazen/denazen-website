@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 460" role="img" aria-label="Two-tier content encryption: the Circle key (AES-256, shared with circle members) wraps a per-post Content key (AES-256, fresh random), which in turn encrypts each attached .zen file — the post's text and every image.">
+  <defs>
+    <style>
+      .tier-outer { fill: #ffffff; stroke: #6B2C91; stroke-width: 2; }
+      .tier-inner { fill: #faf7fd; stroke: #6B2C91; stroke-width: 2; }
+      .zen { fill: #f0d9ff; stroke: #6B2C91; stroke-width: 1.5; }
+      .arrow { stroke: #6B2C91; stroke-width: 2; fill: none; }
+      .lbl-head { font: 600 15px/1.2 Inter, sans-serif; fill: #111827; }
+      .lbl-sub { font: 400 12px/1.3 Inter, sans-serif; fill: #4b5563; }
+      .lbl-op { font: 400 11px/1.2 'JetBrains Mono', ui-monospace, monospace; fill: #6B2C91; }
+      .lbl-file { font: 400 12px/1.2 'JetBrains Mono', ui-monospace, monospace; fill: #111827; }
+    </style>
+    <marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#6B2C91"/>
+    </marker>
+  </defs>
+
+  <!-- Circle key (outer tier) -->
+  <rect x="120" y="20" width="480" height="76" rx="8" class="tier-outer"/>
+  <text x="360" y="48" text-anchor="middle" class="lbl-head">Circle key · AES-256</text>
+  <text x="360" y="68" text-anchor="middle" class="lbl-sub">Long-lived, shared with circle members</text>
+  <text x="360" y="86" text-anchor="middle" class="lbl-sub">Wrapped by messaging key when shared; vault key at rest</text>
+
+  <line x1="360" y1="96" x2="360" y2="126" class="arrow" marker-end="url(#arr2)"/>
+  <text x="370" y="115" class="lbl-op">wraps</text>
+
+  <!-- Content key (inner tier) -->
+  <rect x="160" y="132" width="400" height="70" rx="8" class="tier-inner"/>
+  <text x="360" y="160" text-anchor="middle" class="lbl-head">Content key · AES-256 random</text>
+  <text x="360" y="180" text-anchor="middle" class="lbl-sub">Fresh per post · 32 random bytes</text>
+  <text x="360" y="194" text-anchor="middle" class="lbl-sub">Stored encrypted in the content-key record</text>
+
+  <line x1="360" y1="202" x2="360" y2="234" class="arrow" marker-end="url(#arr2)"/>
+  <text x="370" y="223" class="lbl-op">encrypts</text>
+
+  <!-- .zen files (leaves) -->
+  <text x="360" y="256" text-anchor="middle" class="lbl-sub">Post attachments</text>
+
+  <g transform="translate(70 270)">
+    <rect x="0" y="0" width="160" height="86" rx="6" class="zen"/>
+    <text x="80" y="32" text-anchor="middle" class="lbl-file">_text.zen</text>
+    <text x="80" y="52" text-anchor="middle" class="lbl-sub">Post body text</text>
+    <text x="80" y="68" text-anchor="middle" class="lbl-sub">AES-CBC + PKCS7</text>
+  </g>
+
+  <g transform="translate(280 270)">
+    <rect x="0" y="0" width="160" height="86" rx="6" class="zen"/>
+    <text x="80" y="32" text-anchor="middle" class="lbl-file">image_0.zen</text>
+    <text x="80" y="52" text-anchor="middle" class="lbl-sub">First attached image</text>
+    <text x="80" y="68" text-anchor="middle" class="lbl-sub">Fresh random IV</text>
+  </g>
+
+  <g transform="translate(490 270)">
+    <rect x="0" y="0" width="160" height="86" rx="6" class="zen"/>
+    <text x="80" y="32" text-anchor="middle" class="lbl-file">image_N.zen</text>
+    <text x="80" y="52" text-anchor="middle" class="lbl-sub">Additional images</text>
+    <text x="80" y="68" text-anchor="middle" class="lbl-sub">…</text>
+  </g>
+
+  <text x="360" y="408" text-anchor="middle" class="lbl-sub">Opaque binary blobs to Bluesky — indexed only as file attachments</text>
+</svg>

@@ -587,6 +587,62 @@ section { padding-block: var(--section-pad); }
 .anchor-link:hover { color: var(--c-accent); text-decoration: none; }
 .doc-content h2:hover .anchor-link,
 .doc-content h3:hover .anchor-link { color: var(--c-accent); }
+
+.doc-content .callout {
+  margin: 2rem 0;
+  padding: 1.5rem 1.75rem;
+  border: 1px solid var(--c-accent);
+  background: var(--c-bg-tint);
+  border-radius: var(--radius);
+}
+.doc-content .callout-label {
+  display: block;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: var(--c-accent);
+  margin-bottom: 0.5rem;
+}
+.doc-content .callout p {
+  margin: 0;
+  color: var(--c-text);
+  line-height: 1.5;
+}
+.doc-content .callout p + p { margin-top: 0.75rem; }
+.doc-content .callout-invariant p {
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.doc-content figure {
+  margin: 2rem 0;
+}
+.doc-content figure svg,
+.doc-content figure img {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.doc-content figcaption {
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  color: var(--c-text-muted);
+  text-align: center;
+}
+
+.doc-lead {
+  padding: 1.5rem 1.75rem;
+  background: linear-gradient(180deg, var(--c-dark) 0%, #1a0f2e 100%);
+  color: #ffffff;
+  border-radius: var(--radius);
+  margin: 0 0 2.5rem;
+}
+.doc-lead p { color: #e9d9fa; margin: 0; }
+.doc-lead p + p { margin-top: 0.75rem; }
+.doc-lead strong { color: #ffffff; }
 @media (max-width: 900px) {
   .doc-layout { grid-template-columns: 1fr; gap: 2rem; }
   .doc-toc { position: static; }
