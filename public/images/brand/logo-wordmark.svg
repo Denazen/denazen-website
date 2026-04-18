@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 40" role="img" aria-label="Denazen">
-  <g fill="#6B2C91">
-    <!-- Lock mark -->
-    <rect x="4" y="16" width="22" height="18" rx="3"/>
-    <path d="M9 16 V11 a6 6 0 0 1 12 0 V16" fill="none" stroke="#6B2C91" stroke-width="2.4"/>
-    <circle cx="15" cy="25" r="2.5" fill="#ffffff"/>
-  </g>
-  <text x="36" y="29" font-family="Inter, sans-serif" font-weight="800" font-size="22" fill="#111827" letter-spacing="-0.5">denazen</text>
-</svg>
