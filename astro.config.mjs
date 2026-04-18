@@ -5,5 +5,10 @@ export default defineConfig({
   trailingSlash: 'always',
   build: {
     format: 'directory'
+  },
+  vite: {
+    server: {
+      allowedHosts: ['.trycloudflare.com', '.ngrok-free.app', '.ngrok.app']
+    }
   }
 });

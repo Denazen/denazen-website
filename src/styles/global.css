@@ -304,6 +304,31 @@ section { padding-block: var(--section-pad); }
   font-size: 0.875rem;
   color: var(--c-text-muted);
 }
+.waitlist-success {
+  max-width: 460px;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--c-accent);
+  background: var(--c-bg-tint);
+  border-radius: var(--radius);
+  color: var(--c-text);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.waitlist-success strong { color: var(--c-accent); font-weight: 700; margin-right: 0.25rem; }
+.section-dark .waitlist-success {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.35);
+  color: #ffffff;
+}
+.section-dark .waitlist-success strong { color: var(--c-accent-tint); }
+.waitlist-error {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: #b91c1c;
+}
+.section-dark .waitlist-error { color: #ffc9c9; }
+.waitlist input[type="email"]:disabled,
+.waitlist button:disabled { opacity: 0.6; cursor: not-allowed; }
 .section-dark .waitlist-note { color: #b8a6d4; }
 .section-dark .waitlist input[type="email"] {
   background: rgba(255,255,255,0.08);

@@ -47,12 +47,27 @@ src/
 - **Type scale**: hero `clamp(2.5rem, 6vw, 4.5rem)`, section H2 `clamp(1.75rem, 3.5vw, 2.5rem)`. Inter ExtraBold 800 for display, Regular 400 for body.
 - **Layout**: max content width 72rem; narrow-column (text-only) pages use 44rem. Section padding 6rem desktop / 4rem mobile.
 
-## Waitlist integration (TODO)
+## Waitlist integration (MailerLite via Cloudflare Pages Function)
 
-The form in `src/components/WaitlistForm.astro` currently posts to `/api/waitlist` (placeholder). To wire it to MailerLite, either:
+The form in `src/components/WaitlistForm.astro` submits to `/api/waitlist`, which is served by [functions/api/waitlist.ts](functions/api/waitlist.ts) — a Cloudflare Pages Function that POSTs to MailerLite's Subscribers API.
 
-1. Replace the form markup with MailerLite's universal embed snippet (simplest), or
-2. Add a Cloudflare Pages Function at `functions/api/waitlist.ts` that POSTs to the MailerLite Subscribers API with a `MAILERLITE_API_KEY` secret.
+### One-time setup
+
+1. **Create a MailerLite group** for the waitlist. Copy the numeric group ID from the group's URL or API.
+2. **Generate a MailerLite API token** at Integrations → API. Scope: `subscribers:write` only.
+3. **Configure opt-in on the group** (double vs single) in the MailerLite dashboard. The API call does not force a status — it defers to the group setting.
+4. **Add environment variables in Cloudflare Pages** (Settings → Environment variables, Production + Preview):
+   - `MAILERLITE_API_TOKEN` — paste the token; mark as **Encrypted**.
+   - `MAILERLITE_GROUP_ID` — paste the group ID; plain text is fine.
+5. Redeploy (any new push triggers a rebuild with the vars available).
+
+### Local testing
+
+The Astro dev server (`npm run dev`) does not run Cloudflare Pages Functions — form submissions in local dev will 404. Options:
+
+- **Cloudflare Tunnel** (fastest): run `cloudflared tunnel --url http://localhost:4321` to expose dev over HTTPS for phone/device testing — but the API endpoint still won't work until deployed.
+- **Wrangler Pages dev** (full stack): `npm run build && npx wrangler pages dev dist --compatibility-date=2024-10-01` with env vars set via `.dev.vars` (gitignored) for a local-first end-to-end test.
+- **Preview deploys** (simplest for form testing): push to a branch; Cloudflare Pages builds an HTTPS preview URL with the Functions live.
 
 ## Deployment (Cloudflare Pages)
 

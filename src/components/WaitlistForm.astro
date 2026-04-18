@@ -10,10 +10,6 @@ const {
   note = 'Invite-only alpha. We\u2019ll email you when a spot opens.',
   id = 'waitlist',
 } = Astro.props;
-
-// TODO: swap to MailerLite embed/API when list ID + credentials are provided.
-// Current form posts to /api/waitlist (placeholder) so the UI is fully wired
-// and can be redirected at the endpoint level without touching page markup.
 ---
 <form class="waitlist" action="/api/waitlist" method="POST" id={id} novalidate>
   <label for={`${id}-email`} class="sr-only">Email address</label>
@@ -29,3 +25,82 @@ const {
   <button type="submit" class="btn btn-primary">{buttonLabel}</button>
 </form>
 <p class="waitlist-note">{note}</p>
+
+<script>
+  const forms = document.querySelectorAll<HTMLFormElement>('form.waitlist');
+
+  forms.forEach((form) => {
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const input = form.querySelector<HTMLInputElement>('input[type="email"]');
+      const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+      if (!input || !button) return;
+
+      const email = input.value.trim();
+      if (!email) {
+        showError(form, 'Please enter your email.');
+        return;
+      }
+
+      clearError(form);
+      const originalLabel = button.textContent;
+      button.disabled = true;
+      input.disabled = true;
+      button.textContent = 'Submitting\u2026';
+
+      try {
+        const response = await fetch('/api/waitlist', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({ email }),
+        });
+        const data = (await response.json().catch(() => ({}))) as { ok?: boolean; error?: string };
+
+        if (response.ok && data.ok) {
+          showSuccess(form);
+          return;
+        }
+        showError(form, data.error ?? 'Something went wrong. Please try again.');
+      } catch {
+        showError(form, 'Network error. Please try again.');
+      } finally {
+        if (form.isConnected) {
+          button.disabled = false;
+          input.disabled = false;
+          button.textContent = originalLabel;
+        }
+      }
+    });
+  });
+
+  function showSuccess(form: HTMLFormElement) {
+    const note = form.nextElementSibling as HTMLElement | null;
+    const success = document.createElement('div');
+    success.className = 'waitlist-success';
+    success.setAttribute('role', 'status');
+    success.innerHTML = '<strong>\u2713 You\u2019re on the list.</strong> We\u2019ll be in touch when your invite is ready.';
+    form.replaceWith(success);
+    if (note && note.classList.contains('waitlist-note')) note.remove();
+  }
+
+  function showError(form: HTMLFormElement, message: string) {
+    let el = form.parentElement?.querySelector<HTMLElement>(`.waitlist-error[data-for="${form.id}"]`);
+    if (!el) {
+      el = document.createElement('p');
+      el.className = 'waitlist-error';
+      el.setAttribute('role', 'alert');
+      el.dataset.for = form.id;
+      form.insertAdjacentElement('afterend', el);
+    }
+    el.textContent = message;
+  }
+
+  function clearError(form: HTMLFormElement) {
+    const el = form.parentElement?.querySelector<HTMLElement>(`.waitlist-error[data-for="${form.id}"]`);
+    el?.remove();
+  }
+</script>
