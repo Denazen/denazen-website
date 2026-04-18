@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # Claude Code local state
 .claude/
+
+# Uncompressed source mockups (kept local; committed versions in public/images/screenshots/)
+apple-iphone-*-mockup/
