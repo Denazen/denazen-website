@@ -48,11 +48,28 @@ const sections = [
 
       <div class="doc-layout">
         <aside class="doc-toc" aria-label="On this page">
-          <h4>Contents</h4>
-          <ul>
-            {sections.map((s) => <li><a href={`#${s.id}`}>{s.label}</a></li>)}
-          </ul>
+          <details open class="doc-toc-details">
+            <summary class="doc-toc-summary">Contents</summary>
+            <h4>Contents</h4>
+            <ul>
+              {sections.map((s) => <li><a href={`#${s.id}`}>{s.label}</a></li>)}
+            </ul>
+          </details>
         </aside>
+        <script is:inline>
+          // Start with the TOC collapsed on narrow viewports.
+          if (window.matchMedia('(max-width: 900px)').matches) {
+            document.querySelector('.doc-toc-details')?.removeAttribute('open');
+          }
+          // Also collapse the TOC after a user picks a link on mobile.
+          document.querySelectorAll('.doc-toc-details a').forEach((a) => {
+            a.addEventListener('click', () => {
+              if (window.matchMedia('(max-width: 900px)').matches) {
+                document.querySelector('.doc-toc-details')?.removeAttribute('open');
+              }
+            });
+          });
+        </script>
 
         <article class="doc-content">
           <div class="doc-lead">

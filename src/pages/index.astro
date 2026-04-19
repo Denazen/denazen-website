@@ -11,9 +11,16 @@ const description = 'A privacy-first social network built on Bluesky. Share publ
     <div class="container">
       <div class="hero-grid">
         <div class="hero-text">
-          <h1>Public when you want.<br />Private when it matters.</h1>
+          <h1>Post Freely</h1>
           <p class="lead">
-            A social network built on Bluesky, with private circles that only you and the people you choose can read. Not even we can see them.
+            Share what you actually want to share — with exactly the people who should see it.
+          </p>
+          <p class="hero-encrypted">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="11" width="18" height="11" rx="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            End-to-end encrypted. Built on Bluesky.
           </p>
           <WaitlistForm id="waitlist" buttonLabel="Request invite" note="Invite-only alpha. We'll email you when a spot opens." />
         </div>
@@ -48,7 +55,7 @@ const description = 'A privacy-first social network built on Bluesky. Share publ
             Post to the open web like you always have. Denazen is built on the AT Protocol, so your public posts live on Bluesky — followed by whoever follows you, discoverable by anyone.
           </p>
           <p>
-            Bring your Bluesky handle. Keep your followers. Nothing about public posting changes.
+            Bring your Bluesky or AT Protocol handle, or create a new one. Keep your followers. Nothing about public posting changes.
           </p>
         </div>
       </div>
@@ -62,10 +69,10 @@ const description = 'A privacy-first social network built on Bluesky. Share publ
         <div class="info-text">
           <h2>Private when it matters</h2>
           <p>
-            For everything else, Denazen adds a private layer. Posts are end-to-end encrypted on your device before they leave it. Only the people you share with can decrypt them.
+            For the moments not everyone needs to see, Denazen adds a private layer. Posts are encrypted on your device before they leave it. Only the people you trust can decrypt them.
           </p>
           <p>
-            No one else can see this. Not even us.
+            No one else can see them. Not even us.
           </p>
           <p class="info-actions">
             <a href="/security/" class="btn btn-outline">How the encryption works →</a>
@@ -88,10 +95,10 @@ const description = 'A privacy-first social network built on Bluesky. Share publ
         <div class="info-text">
           <h2>Not everything is for everyone</h2>
           <p>
-            Put people into private circles. Each one has its own space. Share with your close friends without broadcasting to coworkers. Share with family without posting for strangers.
+            Create your own private circles. Share with your close friends without broadcasting to coworkers. Share with family without posting for strangers.
           </p>
           <p>
-            Circles aren't friend lists. You decide who's in each one, and you can revoke access anytime — cryptographically, not as a promise.
+            You decide who's in each one, and you can revoke access anytime — cryptographically, not as a promise.
           </p>
         </div>
       </div>
@@ -162,22 +169,11 @@ const description = 'A privacy-first social network built on Bluesky. Share publ
           </p>
         </div>
         <div class="info-visual">
-          <svg viewBox="0 0 360 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three items crossed out: ads, trackers, algorithmic feed.">
-            <g font-family="Inter, sans-serif" font-weight="500" font-size="22" fill="#4b5563">
-              <g transform="translate(40 60)">
-                <text x="0" y="0">Ads</text>
-                <line x1="-8" y1="-8" x2="70" y2="-32" stroke="#6B2C91" stroke-width="3" stroke-linecap="round"/>
-              </g>
-              <g transform="translate(40 140)">
-                <text x="0" y="0">Trackers</text>
-                <line x1="-8" y1="-8" x2="120" y2="-32" stroke="#6B2C91" stroke-width="3" stroke-linecap="round"/>
-              </g>
-              <g transform="translate(40 220)">
-                <text x="0" y="0">Algorithmic feed</text>
-                <line x1="-8" y1="-8" x2="220" y2="-32" stroke="#6B2C91" stroke-width="3" stroke-linecap="round"/>
-              </g>
-            </g>
-          </svg>
+          <ul class="denial-typo" role="list" aria-label="What Denazen doesn't do">
+            <li>Ads</li>
+            <li>Trackers</li>
+            <li>Algorithmic feeds</li>
+          </ul>
         </div>
       </div>
     </div>
