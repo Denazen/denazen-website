@@ -27,6 +27,13 @@
   font-style: normal;
   font-display: swap;
 }
+@font-face {
+  font-family: 'Manrope';
+  src: url('/fonts/manrope/Manrope-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 /* ---------- Design tokens ---------- */
 :root {
@@ -458,12 +465,13 @@ section { padding-block: var(--section-pad); }
 }
 .site-nav a.brand { display: inline-flex; align-items: center; gap: 0.55rem; }
 .site-nav a.brand:hover { text-decoration: none; }
-.site-nav .brand-fox { height: 40px; width: 40px; display: block; }
+.site-nav .brand-fox { height: 48px; width: 48px; display: block; }
 .site-nav .brand-text {
-  font-weight: 800;
-  font-size: 1.6rem;
-  letter-spacing: -0.02em;
-  color: var(--c-text);
+  font-family: 'Manrope', var(--font-sans);
+  font-weight: 700;
+  font-size: 1.9rem;
+  letter-spacing: -0.01em;
+  color: var(--c-accent);
   line-height: 1;
 }
 .nav-links { display: flex; gap: 1.5rem; align-items: center; }
@@ -528,12 +536,13 @@ section { padding-block: var(--section-pad); }
   margin-bottom: 1rem;
 }
 .footer-brand .brand:hover { text-decoration: none; }
-.footer-brand .brand-fox { height: 38px; width: 38px; display: block; }
+.footer-brand .brand-fox { height: 46px; width: 46px; display: block; }
 .footer-brand .brand-text {
-  font-weight: 800;
-  font-size: 1.5rem;
-  letter-spacing: -0.02em;
-  color: var(--c-text);
+  font-family: 'Manrope', var(--font-sans);
+  font-weight: 700;
+  font-size: 1.8rem;
+  letter-spacing: -0.01em;
+  color: var(--c-accent);
   line-height: 1;
 }
 .footer-brand p { font-size: 0.95rem; max-width: 22rem; }
@@ -851,6 +860,32 @@ section { padding-block: var(--section-pad); }
   color: var(--c-text-muted);
   font-size: 0.9rem;
   margin-bottom: 2rem;
+}
+
+.legal-content .founder {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  margin-block: 1.25rem;
+}
+.legal-content .founder-photo {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.legal-content .founder p { margin: 0; }
+@media (max-width: 520px) {
+  .legal-content .founder {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  .legal-content .founder-photo {
+    width: 80px;
+    height: 80px;
+  }
 }
 
 /* ---------- Utilities ---------- */

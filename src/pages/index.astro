@@ -11,7 +11,7 @@ const description = 'A privacy-first social network built on Bluesky. Share publ
     <div class="container">
       <div class="hero-grid">
         <div class="hero-text">
-          <h1>Post Freely</h1>
+          <h1>Your space, your rules</h1>
           <p class="lead">
             Share what you actually want to share — with exactly the people who should see it.
           </p>
@@ -20,7 +20,7 @@ const description = 'A privacy-first social network built on Bluesky. Share publ
               <rect x="3" y="11" width="18" height="11" rx="2"></rect>
               <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
             </svg>
-            <span>End-to-end encrypted. Not even we can see your private posts.<br />Built on Bluesky.</span>
+            <span>End-to-end encrypted. Not even we can see your private posts.</span>
           </p>
           <WaitlistForm id="waitlist" buttonLabel="Request invite" note="Invite-only alpha. Early spots are limited." />
         </div>
@@ -45,18 +45,18 @@ const description = 'A privacy-first social network built on Bluesky. Share publ
   <!-- Public when you want -->
   <section>
     <div class="container">
-      <div class="info-grid">
-        <div class="info-visual">
-          <img src="/images/screenshots/feed-public.webp" alt="Denazen's public feed, with the Public and Private tabs visible at the top of the screen." width="560" height="1111" />
-        </div>
+      <div class="info-grid reversed">
         <div class="info-text">
           <h2>Public when you want</h2>
           <p>
-            Post to the open web like you always have. Denazen is built on the AT Protocol, so your public posts live on Bluesky — followed by whoever follows you, discoverable by anyone.
+            Denazen is built on Bluesky, so you plug straight into a network of 40+ million. Post openly, follow anyone, get discovered.
           </p>
           <p>
-            Bring your Bluesky or AT Protocol handle, or create a new one. Keep your followers. Nothing about public posting changes.
+            Bring your handle, or make a new one. Keep every follower you already have.
           </p>
+        </div>
+        <div class="info-visual">
+          <img src="/images/screenshots/feed-public.webp" alt="Denazen's public feed, with the Public and Private tabs visible at the top of the screen." width="560" height="1111" />
         </div>
       </div>
     </div>
@@ -65,7 +65,7 @@ const description = 'A privacy-first social network built on Bluesky. Share publ
   <!-- Private when it matters -->
   <section class="section-tint">
     <div class="container">
-      <div class="info-grid reversed">
+      <div class="info-grid">
         <div class="info-text">
           <h2>Private when it matters</h2>
           <p>
@@ -88,10 +88,7 @@ const description = 'A privacy-first social network built on Bluesky. Share publ
   <!-- Circles -->
   <section>
     <div class="container">
-      <div class="info-grid">
-        <div class="info-visual">
-          <img src="/images/screenshots/circles.webp" alt="Denazen's circles management screen: four circles named Closest Friends, Political Friends, Book Club, and Family, with invite buttons and member counts." width="560" height="1111" />
-        </div>
+      <div class="info-grid reversed">
         <div class="info-text">
           <h2>Not everything is for everyone</h2>
           <p>
@@ -100,6 +97,9 @@ const description = 'A privacy-first social network built on Bluesky. Share publ
           <p>
             You decide who's in each one, and you can revoke access anytime — cryptographically, not as a promise.
           </p>
+        </div>
+        <div class="info-visual">
+          <img src="/images/screenshots/circles.webp" alt="Denazen's circles management screen: four circles named Closest Friends, Political Friends, Book Club, and Family, with invite buttons and member counts." width="560" height="1111" />
         </div>
       </div>
     </div>
@@ -165,7 +165,10 @@ const description = 'A privacy-first social network built on Bluesky. Share publ
             Denazen isn't built to keep you scrolling. There are no ads, no behavioral tracking, no feed sorted by what will make you react. Just the people you've chosen to hear from.
           </p>
           <p>
-            We're not selling your data. We can't — we can't read it.
+            Most of what people do online is watched — platforms, data brokers, AI models scraping whatever they can reach. Private content on Denazen is opaque to all of them. No key, no read.
+          </p>
+          <p>
+            We're not selling your data. We can't even see it.
           </p>
         </div>
         <div class="info-visual">
@@ -173,6 +176,7 @@ const description = 'A privacy-first social network built on Bluesky. Share publ
             <li>Ads</li>
             <li>Trackers</li>
             <li>Algorithmic feeds</li>
+            <li>Training data</li>
           </ul>
         </div>
       </div>
