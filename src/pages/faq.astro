@@ -50,7 +50,7 @@ import WaitlistForm from '../components/WaitlistForm.astro';
           <details>
             <summary>How does end-to-end encryption work here?</summary>
             <p>Private content is encrypted on your device before it's ever sent. The decryption keys only exist on the devices of people you've shared with. Denazen's servers and Bluesky's servers store the ciphertext but cannot read it.</p>
-            <p>The technical details — algorithms, key exchange, rotation, threat model — live on the <a href="/security/">Security page</a>.</p>
+            <p>The technical details — algorithms, key exchange, rotation, threat model — live on the <a href="/security/architecture/">encryption architecture page</a>.</p>
           </details>
 
           <details>
@@ -115,7 +115,7 @@ import WaitlistForm from '../components/WaitlistForm.astro';
             <summary>What happens if I forget my encryption password?</summary>
             <p>Your private content becomes permanently inaccessible. This is intentional: if Denazen had a way to recover it for you, Denazen would also be able to read your private content — breaking the core promise.</p>
             <p>Your public Bluesky identity, handle, and follows are unaffected; those are tied to your Bluesky password, which is recoverable through Bluesky the normal way. But your Circles, past private posts, received DMs, and the keys that decrypt them all depend on the encryption password.</p>
-            <p>Write the password down somewhere safe, or use a password manager. See the <a href="/security/#recovery">Security page</a> for the full explanation.</p>
+            <p>Write the password down somewhere safe, or use a password manager. See the <a href="/security/architecture/#recovery">encryption architecture page</a> for the full explanation.</p>
           </details>
 
           <details>

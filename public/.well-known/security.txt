@@ -1,10 +1,7 @@
-# Denazen — Security contact
-# https://www.denazen.com/security/
-#
-# This file follows RFC 9116 (securitytxt.org).
-
 Contact: mailto:security@denazen.com
-Expires: 2027-04-18T00:00:00.000Z
+Contact: https://denazen.com/security
+Expires: 2027-04-19T00:00:00.000Z
 Preferred-Languages: en
-Canonical: https://www.denazen.com/.well-known/security.txt
-Policy: https://www.denazen.com/security/#audit
+Policy: https://denazen.com/security
+Acknowledgments: https://denazen.com/security/acknowledgments
+Canonical: https://denazen.com/.well-known/security.txt
