@@ -428,13 +428,13 @@ section { padding-block: var(--section-pad); }
   line-height: 1;
 }
 .nav-links { display: flex; gap: 1.5rem; align-items: center; }
-.nav-links a {
+.nav-links a:not(.btn) {
   color: var(--c-text-soft);
   font-weight: 500;
   font-size: 0.95rem;
 }
-.nav-links a:hover { color: var(--c-accent); text-decoration: none; }
-.nav-links a.active { color: var(--c-text); }
+.nav-links a:not(.btn):hover { color: var(--c-accent); text-decoration: none; }
+.nav-links a:not(.btn).active { color: var(--c-text); }
 .nav-links .btn { padding: 0.5rem 1rem; font-size: 0.9rem; }
 .nav-toggle {
   display: none;
