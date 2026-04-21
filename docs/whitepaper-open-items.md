@@ -27,15 +27,10 @@ A living list of items still **TBD, partial, or deferred** in the public encrypt
 - **Estimated scope:** ~1–2 weeks (fingerprint utility + UI + DB field).
 - **Blocks:** §15 system-level audit (this is the last unresolved crypto-design TBD).
 
-#### 2. Media sanitization (EXIF / GPS stripping)
-- **Whitepaper refs:** §5.5 ("Under active development")
-- **What's missing:** Automatic stripping of non-essential EXIF metadata (including GPS) from images before AES-CBC encryption into `.zen`. Today the whitepaper tells users to strip manually.
-- **Closure path:**
-  1. Strip all EXIF except orientation in the image-encrypt pipeline (pre-`.zen` generation).
-  2. Add a "Keep metadata" per-post opt-in for the photographer edge case.
-  3. Ship behind a feature flag for one release; watch for image-pipeline regressions.
-  4. Update §5.5 to describe actual behavior.
-- **Estimated scope:** ~3–5 days.
+#### 2. ~~Media sanitization (EXIF / GPS stripping)~~ — CLOSED 2026-04-21
+- **Whitepaper refs:** §5.5 — now describes the implemented behavior
+- **Status:** Implemented via `src/services/imageMetadataService.ts` in the app repo. Strips all APP1–APP15 and COM segments from JPEGs. Runs on both public and encrypted image paths — encrypted images are stripped *before* encryption so the recipient also cannot see GPS / camera data. Unit-tested via `src/__tests__/exif-stripping.test.ts` (8 tests covering APP1/APP13/COM/large-EXIF/SOS preservation/idempotence/non-JPEG rejection). Defense-in-depth: runs after the native `ImageManipulator` JPEG re-encode which typically already strips metadata on iOS/Android.
+- **Remaining:** none on the engineering side. An optional "Keep metadata" per-post toggle for photographers was considered and deferred — no user has asked for it yet; revisit if a use case emerges.
 
 #### 3. Deletion semantics finalization
 - **Whitepaper refs:** §5.6 ("Partially implemented; full semantics under active design"), impacts §14 legal-process answers
