@@ -408,7 +408,7 @@ Cache data URI → render → clean up temp files
 Key properties:
 
 - **Plaintext never persists.** Decrypted data URIs live in component memory only; nothing is written to persistent storage outside ephemeral temp files that are deleted immediately after decryption.
-- **Content keys are cached in-session** to avoid refetching on every image of a multi-image post. The cache is cleared on logout.
+- **Content keys are cached in-session** to avoid refetching on every image of a multi-image post. Cached keys carry a 5-minute TTL, are proactively flushed when the app moves to the background, and are cleared entirely on logout.
 - **Strict two-tier discipline.** If the content-key record exists but fetch or decryption fails, decryption fails. The code never "falls back" to decrypting the `.zen` file directly with the circle key — that would produce garbage and mask real errors.
 
 ---
@@ -473,6 +473,8 @@ All inbox writes go through a single server-side gateway that performs **PDS ses
 4. Writes are attributed to this verified DID.
 
 This means a malicious client cannot impersonate another user when writing to the inbox.
+
+The gateway also maintains a verified DID↔PDS binding — supporting both `did:plc` and `did:web` identifiers — and caches the mapping for the lifetime of the session. This prevents an attacker who controls a rogue PDS from claiming another user's DID mid-session.
 
 ### 8.4 Confirmed-sender authentication
 
@@ -585,6 +587,7 @@ Telemetry is anonymous by construction:
 - Property names that could carry user-identifiable data are listed in an allowlist; a final filter drops them as a last line of defense.
 - Error strings are mapped to a bounded vocabulary at the call site — raw error messages or API response bodies are never captured.
 - Session replay is off. Screen-name and touch autocapture are off. GeoIP is disabled.
+- **User-submitted in-app feedback** is scrubbed of DIDs, handles, and AT-Protocol URIs on-device before transmission to any third-party classification service.
 
 ---
 
