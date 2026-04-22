@@ -7,7 +7,7 @@
   "tos_uri": "https://denazen.com/terms/",
   "application_type": "native",
   "redirect_uris": [
-    "denazen://oauth-callback"
+    "com.denazen:/oauth-callback"
   ],
   "grant_types": [
     "authorization_code",
