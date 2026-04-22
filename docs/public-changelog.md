@@ -1,6 +1,6 @@
 # Security Changelog
 
-> **Draft — not yet ready for public review.** This changelog is a pre-launch working draft. Content, scope, and claims are subject to change before Denazen is publicly available. Do not cite from this version.
+> **Draft — not yet ready for technical/research review.** This changelog is a pre-launch working draft. Content, scope, and claims are subject to change before Denazen is publicly available. Do not cite from this version.
 
 A dated record of material changes to Denazen's public-facing security documents — the [Security Policy](/security/), the [encryption architecture whitepaper](/security/architecture/), and the [RFC 9116 security.txt](/.well-known/security.txt). Entries are newest first.
 

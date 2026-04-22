@@ -332,11 +332,16 @@ No post content, no key material, and no plaintext of any kind is stored in this
 
 ### 5.5 Media sanitization
 
-*Status: under active development.*
+Encrypting an image does not by itself protect a user from metadata embedded inside the image — EXIF tags, GPS coordinates, camera serial numbers, and editing-software fingerprints travel inside the pixel file. A recipient who decrypts the image would otherwise be able to extract them.
 
-Encrypting an image does not by itself protect a user from metadata embedded inside the image — EXIF tags, GPS coordinates, camera serial numbers, and editing-software fingerprints travel inside the pixel file. A recipient who decrypts the image can extract them.
+Denazen strips all non-structural JPEG metadata from every image before it leaves the device. Two independent layers run in sequence:
 
-Denazen's target behavior is to strip all non-essential metadata from images before encryption, by default, with no user action required. The exact scrubbing policy — which tags are removed and which are preserved (e.g., orientation) — is under active design. Until this is shipped and documented here, users who care about image metadata should strip it on their own device before posting.
+1. The platform's native image library (`ImageManipulator`) re-encodes the image as JPEG with the user's target dimensions and quality. Re-encoding through the iOS / Android native image pipelines typically strips EXIF on its own.
+2. An in-app byte-level stripper walks the JPEG segment structure and removes APP1–APP15 marker segments (EXIF, XMP, ICC profiles, Photoshop resources, thumbnails, GPS, camera info) and COM (comment) segments. The JFIF header (APP0) and all structural markers (SOF / DQT / DHT / SOS etc.) are preserved. Pixel orientation is baked into the image data by step 1, so no orientation tag is needed.
+
+The second layer runs for **both public and encrypted posts** — encrypted images are stripped before encryption, so the recipient who decrypts the image cannot see the sender's GPS coordinates, device model, or capture timestamp either.
+
+This is a fail-safe design: if the stripper is ever bypassed (e.g. a future code path skips the helper), the preceding native re-encode still removes most metadata. If the native re-encode ever stops stripping (e.g. a library behavior change), the explicit byte-level stripper still catches it.
 
 ### 5.6 Deletion
 
@@ -408,7 +413,7 @@ Cache data URI → render → clean up temp files
 Key properties:
 
 - **Plaintext never persists.** Decrypted data URIs live in component memory only; nothing is written to persistent storage outside ephemeral temp files that are deleted immediately after decryption.
-- **Content keys are cached in-session** to avoid refetching on every image of a multi-image post. The cache is cleared on logout.
+- **Content keys are cached in-session** to avoid refetching on every image of a multi-image post. Cached keys carry a 5-minute TTL, are proactively flushed when the app moves to the background, and are cleared entirely on logout.
 - **Strict two-tier discipline.** If the content-key record exists but fetch or decryption fails, decryption fails. The code never "falls back" to decrypting the `.zen` file directly with the circle key — that would produce garbage and mask real errors.
 
 ---
@@ -473,6 +478,8 @@ All inbox writes go through a single server-side gateway that performs **PDS ses
 4. Writes are attributed to this verified DID.
 
 This means a malicious client cannot impersonate another user when writing to the inbox.
+
+The gateway also maintains a verified DID↔PDS binding — supporting both `did:plc` and `did:web` identifiers — and caches the mapping for the lifetime of the session. This prevents an attacker who controls a rogue PDS from claiming another user's DID mid-session.
 
 ### 8.4 Confirmed-sender authentication
 
@@ -585,6 +592,7 @@ Telemetry is anonymous by construction:
 - Property names that could carry user-identifiable data are listed in an allowlist; a final filter drops them as a last line of defense.
 - Error strings are mapped to a bounded vocabulary at the call site — raw error messages or API response bodies are never captured.
 - Session replay is off. Screen-name and touch autocapture are off. GeoIP is disabled.
+- **User-submitted in-app feedback** is scrubbed of DIDs, handles, and AT-Protocol URIs on-device before transmission to any third-party classification service.
 
 ---
 
