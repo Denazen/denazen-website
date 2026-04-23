@@ -1,4 +1,7 @@
 Contact: mailto:security@denazen.com
+Contact: https://denazen.com/security
 Expires: 2027-04-19T00:00:00.000Z
 Preferred-Languages: en
+Policy: https://denazen.com/security
+Acknowledgments: https://denazen.com/security/acknowledgments
 Canonical: https://denazen.com/.well-known/security.txt
