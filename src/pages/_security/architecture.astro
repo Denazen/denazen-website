@@ -10,7 +10,7 @@ const sections = [
   { id: 'password-strength', label: '4.1 Password strength' },
   { id: 'recovery', label: '4.2 Recovery' },
   { id: 'devices', label: '4.3 Devices' },
-  { id: 'auto-relogin', label: '4.4 Auto-re-login' },
+  { id: 'auto-relogin', label: '4.4 Device persistence' },
   { id: 'posting', label: '5. Posting: two-tier encryption' },
   { id: 'media-sanitization', label: '5.5 Media sanitization' },
   { id: 'deletion', label: '5.6 Deletion' },
@@ -47,7 +47,7 @@ const sections = [
           Prefer the plain-language version? See the <a href="/faq/">FAQ</a>.
         </p>
         <p class="mt-2" style="color: var(--c-text-muted); font-size: 0.95rem;">
-          Last updated <time datetime="2026-04-21">April 21, 2026</time> · <a href="/security/changelog/">View changelog</a>
+          Last updated <time datetime="2026-04-23">April 23, 2026</time> · <a href="/security/changelog/">View changelog</a>
         </p>
         <aside class="draft-notice" role="note">
           <strong>Draft — not yet ready for technical/research review</strong>
@@ -119,7 +119,7 @@ const sections = [
               <tr><td>Bluesky PDS operator</td><td>Full read/write on user's repo</td><td>Sees ciphertext blobs, key URIs, and metadata only; cannot derive decryption keys; cannot substitute a contact's public key without detection</td></tr>
               <tr><td>Bluesky AppView / Relay</td><td>Full social graph visibility</td><td>Sees post metadata and follow graph; sees no content and no keys</td></tr>
               <tr><td>Denazen relay / database</td><td>Full server-side read</td><td>Sees ciphertext payloads, DIDs, and metadata only</td></tr>
-              <tr><td>Compromised server-side gateway</td><td>Short-term access to requests</td><td>Sees transient Bluesky session tokens for identity verification only; no long-lived secrets</td></tr>
+              <tr><td>Compromised server-side gateway</td><td>Short-term access to requests</td><td>Sees transient OAuth-issued access tokens and per-request DPoP proofs for identity verification only; no long-lived secrets. Access tokens are DPoP-bound to per-session keypairs held in users' device secure elements (RFC 9449), so token capture alone does not enable impersonation.</td></tr>
               <tr><td>Denazen developer with database access</td><td>Metadata + server ciphertext</td><td>Cannot derive plaintext — same position as the server</td></tr>
               <tr><td>Lost or stolen device (locked)</td><td>Physical access to device storage</td><td>Cannot read key material without device unlock + encryption password</td></tr>
               <tr><td>Future quantum adversary</td><td>Shor's algorithm on classical key exchange; Grover's algorithm on symmetric keys</td><td>ML-KEM-1024 (NIST Level 5 post-quantum KEM) for all key exchange; AES-256 for all content and key-wrapping</td></tr>
@@ -153,6 +153,7 @@ const sections = [
             <li><strong>Metadata and timing.</strong> Bluesky's AppView and Relay see post counts, timestamps, follow graphs, and public post content. The inbox obscures sender identity and message type but not per-user activity timing or message counts.</li>
             <li><strong>Availability.</strong> Denazen's servers and Bluesky's infrastructure must be up for the service to be usable. A malicious operator can deny service; they just cannot read private content.</li>
             <li><strong>Bluesky-layer plaintext posts.</strong> Public posts (<code>app.bsky.feed.post</code> records without the Denazen encryption marker) are plaintext on Bluesky's infrastructure by design — that's what makes them public. Their integrity is whatever Bluesky provides.</li>
+            <li><strong>Bluesky account credentials.</strong> The Bluesky password (or passkey, 2FA factor, etc.) is entered on Bluesky's hosted login page and processed by Bluesky's infrastructure. Denazen does not see, touch, or hold these credentials at any point — but their confidentiality is Bluesky's responsibility, not Denazen's. A user who reuses their Bluesky password elsewhere accepts the risks of that reuse. A user whose Bluesky account is compromised at the Bluesky layer will see their Denazen private content remain encrypted (that is what the encryption password protects), but the attacker will be able to authorize a fresh Denazen OAuth session and would then be limited only by the encryption-password barrier.</li>
             <li><strong>First-contact exchanges before out-of-band verification ships.</strong> TOFU detects any key substitution after first contact, but not during it. A PDS operator who substitutes a contact's key <em>before</em> the first binding can inject themselves; detection requires the OOB verification feature (see Future work).</li>
             <li><strong>User-chosen password equivalence.</strong> Every cryptographic guarantee bottoms out on the entropy of the encryption password (§4.1). A user who picks a low-entropy password accepts a weaker margin against offline attack. The architecture provides tools; it cannot enforce good password choices beyond the 12-character minimum.</li>
           </ul>
@@ -226,7 +227,9 @@ const sections = [
           </ul>
 
           <h2 id="unlock">4. Unlock flow <a class="anchor-link" href="#unlock" aria-label="Permalink">#</a></h2>
-          <pre><code>{`User submits Bluesky password → Bluesky session established.
+          <pre><code>{`"Continue with Bluesky" → in-app browser sheet → bsky.social hosted login.
+   ▼ (user authenticates with Bluesky on Bluesky's hosted page)
+OAuth callback returns DPoP-bound access + refresh tokens.
    ▼
 User submits encryption password.
    ▼
@@ -242,6 +245,9 @@ Fetch EVK from PDS.
 Vault Key = decrypt(EVK, Master Key).
    ▼
 Store {PDK, Master, Vault} in secure device storage for session.`}</code></pre>
+          <p>
+            The Bluesky leg of authentication runs on Bluesky's hosted page (<code>bsky.social</code>) inside an OS-managed in-app browser sheet (<code>ASWebAuthenticationSession</code> on iOS, Custom Tabs on Android). Bluesky handles handle / email entry, password (or passkey) input, 2FA, captcha, and email confirmation — Denazen never sees the user's Bluesky credentials. The OAuth flow returns an access token bound to a per-session DPoP keypair (RFC 9449); the keypair is generated on device, persisted non-extractably in iOS Keychain / Android Keystore, and used to sign every PDS request. Token refresh is handled transparently by <code>@atproto/oauth-client-expo</code> with no visible re-prompt.
+          </p>
           <p><strong>First-time setup</strong> is fail-closed in three phases:</p>
           <ol>
             <li>Generate Master Key, Vault Key, EMK, and EVK in memory — no network I/O yet.</li>
@@ -259,7 +265,7 @@ Store {PDK, Master, Vault} in secure device storage for session.`}</code></pre>
           <ul>
             <li><strong>Minimum length:</strong> 12 characters. This is the only hard requirement for submission.</li>
             <li><strong>No maximum length.</strong> Passphrases are welcome.</li>
-            <li><strong>Must differ from the Bluesky password.</strong> A minimum Levenshtein edit distance is enforced to prevent a PDS operator who captures the Bluesky password from trivially reusing it against captured Argon2id material.</li>
+            <li><strong>Independent of the Bluesky password.</strong> Bluesky credentials are entered on Bluesky's hosted login page during the OAuth flow and never touch Denazen's process; there is no opportunity for the encryption password to be cross-leaked through Denazen even if the user picks identical strings. (A user is still strongly encouraged to pick distinct, high-entropy passwords for the two systems.)</li>
           </ul>
 
           <h4 class="doc-subhead">The real-time strength meter</h4>
@@ -326,7 +332,7 @@ Store {PDK, Master, Vault} in secure device storage for session.`}</code></pre>
             This is intrinsic to the zero-trust design. If a server-side recovery path existed, the server could use it. The "no plaintext ever touches a server" guarantee requires that no party other than the user hold material capable of unlocking the vault.
           </p>
           <p>
-            Public posts (the Bluesky layer) are unaffected: they live under the AT Protocol identity, which is re-derivable from the handle and Bluesky password.
+            Public posts (the Bluesky layer) are unaffected: they live under the AT Protocol identity, which the user can continue to access via Bluesky's own clients and account-recovery flows. Denazen's vault loss does not touch the Bluesky account.
           </p>
 
           <h3 id="devices">4.3 Devices <a class="anchor-link" href="#devices" aria-label="Permalink">#</a></h3>
@@ -338,32 +344,39 @@ Store {PDK, Master, Vault} in secure device storage for session.`}</code></pre>
             <li>The <strong>EVK</strong> (encrypted Vault Key) lives on the user's Bluesky PDS under the security record.</li>
             <li>All long-lived symmetric keys — messaging keys, circle keys, friend keys, Kyber secret key — live on the PDS as encrypted records wrapped under the Vault Key.</li>
           </ul>
-          <p>A new device unlocks the account by presenting three credentials:</p>
+          <p>A new device unlocks the account by completing two flows:</p>
           <ol>
-            <li><strong>AT Protocol handle</strong> — the account identity.</li>
-            <li><strong>Bluesky password</strong> — to establish a PDS session and read the user's security record.</li>
+            <li><strong>Bluesky OAuth</strong> on Bluesky's hosted login page — handle, password (or passkey), 2FA, and any other credential are entered on <code>bsky.social</code> itself. Denazen receives only an OAuth-issued access token bound to a per-session DPoP keypair.</li>
             <li><strong>Encryption password</strong> — to derive the PDK, unlock the EMK, then the EVK, then every per-record key in the vault.</li>
           </ol>
           <p>
-            There is no device-to-device sync protocol, no paired-device registration, and no long-lived session on specific hardware. Sign in on any device, unlock, and every key ever received is available from the vault.
+            There is no device-to-device sync protocol, no paired-device registration, and no long-lived session that needs to migrate. Sign in on any device, unlock the vault, and every key ever received is available from the PDS.
           </p>
           <p>
-            Sessions live in secure device storage only for the duration of use. Signing out clears the PDK, Master Key, and Vault Key from the device, leaving nothing that can decrypt content until the next sign-in.
+            Signing out clears the PDK, Master Key, and Vault Key from the device, revokes the OAuth tokens server-side, and wipes the OAuth library's local key + token store. Nothing on the device can decrypt content until the next sign-in.
           </p>
 
-          <h3 id="auto-relogin">4.4 Auto-re-login and the encryption password at rest <a class="anchor-link" href="#auto-relogin" aria-label="Permalink">#</a></h3>
+          <h3 id="auto-relogin">4.4 What persists on the device between launches <a class="anchor-link" href="#auto-relogin" aria-label="Permalink">#</a></h3>
           <p>
-            By default, Denazen stores the encryption password alongside the Bluesky password in the device's secure storage (iOS Keychain / Android Keystore) so the app can silently re-authenticate when session tokens expire — users who open the app daily would otherwise be prompted to re-enter both passwords on every expiry. This is controlled by a user-facing setting (<strong>"Keep me signed in"</strong>), on by default; turning it off requires re-entering the encryption password on every launch.
+            Denazen keeps no Bluesky password and no encryption password on the device. After successful unlock, the device's secure storage (iOS Keychain / Android Keystore) holds:
           </p>
-          <p>A deliberate UX / threat-model tradeoff lives here:</p>
           <ul>
-            <li><strong>What the server sees:</strong> still nothing. The encryption password never leaves the device. The "no plaintext ever touches a server" guarantee is unaffected.</li>
-            <li><strong>What an attacker with an unlocked, malware-resistant device sees:</strong> the password is hardware-protected (Keychain / Keystore class) — the same class of protection the Vault Key itself enjoys. Extracting it requires a compromised OS.</li>
-            <li><strong>What an attacker with a rooted / jailbroken device sees:</strong> an opportunity. SecureStore's guarantees are weaker on a compromised OS. A user who cares about this threat should turn off "Keep me signed in."</li>
-            <li><strong>What explicit sign-out does:</strong> clears the cached password, the PDK, the Master Key, and the Vault Key from the device. App-close (without explicit sign-out) does not — the password persists so the next launch can re-derive.</li>
+            <li>The <strong>derived vault keys</strong> — PDK, Master Key, Vault Key — read at app launch so the user is not re-prompted for the encryption password on every cold start.</li>
+            <li>The <strong>OAuth library's session material</strong> — the DPoP keypair (non-extractable, generated and held in the secure element), the refresh token, and the most recent DPoP-Nonce. These are managed entirely by <code>@atproto/oauth-client-expo</code> and refreshed transparently on each PDS request.</li>
           </ul>
           <p>
-            The post-quantum and zero-trust claims throughout this whitepaper are about what servers hold, not about the device itself. A compromised device is explicitly out of scope (§1.3). "Keep me signed in" is the knob users can turn if their device-level threat model is stricter than the default.
+            The encryption password itself is held only in process memory long enough to derive the PDK, then dropped. The Bluesky password is never on the device at all — it is entered on Bluesky's hosted page and exchanged for an OAuth session that Bluesky issues directly to the OAuth library.
+          </p>
+          <p>What this means at each device-state boundary:</p>
+          <ul>
+            <li><strong>App close (no explicit sign-out).</strong> Vault keys persist in secure storage; OAuth tokens persist in the library's MMKV-backed store. Next launch silently restores both — no prompts.</li>
+            <li><strong>Token expiry.</strong> The OAuth library refreshes the access token on its next outbound call. No user-visible re-prompt; no Bluesky-side re-auth.</li>
+            <li><strong>Explicit sign-out.</strong> Cached vault keys are wiped from secure storage; OAuth tokens are revoked server-side and the library's local store is cleared. Next launch requires the full Bluesky OAuth + encryption-password flow.</li>
+            <li><strong>Compromised, unlocked device.</strong> The vault keys and the OAuth refresh token are hardware-protected at the Keychain / Keystore class. Extracting them requires a compromised OS. The encryption password itself is not stored, so it cannot be extracted from the device — only attacked offline against the EMK + EVK pair, which requires breaching both Denazen's server and the user's PDS (§3.1).</li>
+            <li><strong>Rooted / jailbroken device.</strong> SecureStore's guarantees are weaker on a compromised OS. Vault keys remain wrapped against the OS-level secure store; if that store is compromised the attacker has full access to the session.</li>
+          </ul>
+          <p>
+            The post-quantum and zero-trust claims throughout this whitepaper are about what servers hold, not about the device itself. A compromised device is explicitly out of scope (§1.3).
           </p>
 
           <h2 id="posting">5. Posting: two-tier content encryption <a class="anchor-link" href="#posting" aria-label="Permalink">#</a></h2>
@@ -553,15 +566,19 @@ Deliver {cipherText, encrypted payload}
           </ul>
 
           <h3>8.3 Authenticated write gateway</h3>
-          <p>All inbox writes go through a single server-side gateway that performs <strong>PDS session verification</strong>:</p>
+          <p>All inbox writes go through a single server-side gateway that performs <strong>PDS session verification via DPoP relay</strong> (RFC 9449):</p>
           <ol>
-            <li>The client presents its Bluesky session credential along with the URL of its PDS.</li>
-            <li>The gateway calls the PDS to validate the credential.</li>
-            <li>The DID returned by the PDS — not a client claim — is used for all subsequent operations.</li>
-            <li>Writes are attributed to this verified DID.</li>
+            <li>The client sends three headers per request: the OAuth-issued access token, a freshly-minted DPoP proof JWT bound to the upstream PDS request, and the URL of the user's PDS.</li>
+            <li>The gateway forwards the access token + DPoP proof to the user's PDS at <code>com.atproto.server.getSession</code>. The PDS validates the proof against the access token's <code>cnf.jkt</code> claim — confirming that whoever sent the request holds the DPoP key the token was issued for — and returns the session DID.</li>
+            <li>The gateway <strong>independently resolves</strong> the returned DID to its canonical PDS service endpoint via <code>plc.directory</code> (for <code>did:plc:</code> identifiers) or <code>https://&lt;host&gt;/.well-known/did.json</code> (for <code>did:web:</code> identifiers).</li>
+            <li>The gateway asserts that the canonical PDS matches the URL the client submitted. This binding check is the load-bearing mitigation against a malicious PDS returning arbitrary DIDs from <code>getSession</code>; without it, anyone running a PDS could impersonate any user.</li>
+            <li>Writes are attributed to this verified DID — never to a client claim.</li>
           </ol>
           <p>
-            This means a malicious client cannot impersonate another user when writing to the inbox.
+            DPoP-bound tokens defeat replay: the server-side gateway tracks the proof's <code>jti</code> (JWT ID) in an in-memory cache for the proof's TTL window and rejects any duplicate. A captured request cannot be replayed even within the access token's validity period.
+          </p>
+          <p>
+            The gateway also handles the DPoP-Nonce challenge: when the PDS responds with <code>401 use_dpop_nonce</code>, the gateway propagates the fresh nonce back to the client in a <code>DPoP-Nonce</code> response header so the client can rebuild its proof and retry transparently (the standard RFC 9449 §8 single-shot retry).
           </p>
 
           <h3>8.4 Confirmed-sender authentication</h3>
@@ -664,8 +681,8 @@ Deliver {cipherText, encrypted payload}
               <tr><td>Bluesky PDS</td><td>Ciphertext <code>.zen</code> blobs, encrypted key records, EVK, Kyber public key</td><td>Plaintext content, plaintext keys, encryption password</td></tr>
               <tr><td>Bluesky AppView / Relay</td><td>Post metadata, follow graph</td><td>Content, keys</td></tr>
               <tr><td>Denazen server</td><td>Profile rows (DID + EMK), post-index metadata, inbox rows (opaque ciphertext), invites</td><td>Plaintext content, plaintext keys, passwords, vault keys</td></tr>
-              <tr><td>Server-side gateway (in transit)</td><td>Bluesky session credential (transient, for PDS verification)</td><td>Long-lived secrets, content, keys</td></tr>
-              <tr><td>Device secure storage</td><td>PDK, Master Key, Vault Key, per-account sessions</td><td>— (this is the trust root)</td></tr>
+              <tr><td>Server-side gateway (in transit)</td><td>OAuth-issued access token + per-request DPoP proof (transient, for PDS verification)</td><td>Long-lived secrets, content, keys, encryption password, DPoP private key</td></tr>
+              <tr><td>Device secure storage</td><td>PDK, Master Key, Vault Key, per-account sessions, OAuth refresh token, OAuth DPoP keypair (non-extractable, secure-element-backed)</td><td>Bluesky password, encryption password (— this is the trust root)</td></tr>
               <tr><td>Device general storage</td><td>Encrypted key cache files (ciphertext only), preferences</td><td>Plaintext keys, plaintext content</td></tr>
             </tbody>
           </table></div>
@@ -749,7 +766,7 @@ Deliver {cipherText, encrypted payload}
           <ol>
             <li><strong>No plaintext key ever crosses a network boundary.</strong> The Vault Key is generated on device; it leaves only as the EVK (wrapped under the Master Key) to the PDS and never reaches Denazen's server. The Master Key leaves only as the EMK (wrapped under the PDK) to the Denazen server.</li>
             <li><strong>No plaintext content ever crosses a network boundary.</strong> Posts are encrypted on device before any upload; <code>.zen</code> blobs are opaque to Bluesky; direct messages and inbox messages are sealed under the recipient's Kyber key.</li>
-            <li><strong>Server-side gateways see no secrets.</strong> The write gateway handles session tokens only long enough to call the PDS and has no access to vault, messaging, or circle keys.</li>
+            <li><strong>Server-side gateways see no secrets.</strong> The write gateway handles OAuth access tokens and DPoP proofs only long enough to relay the PDS verification call. It never holds the DPoP private key (which lives in the user's secure element) and never touches vault, messaging, or circle keys.</li>
             <li><strong>Fail-closed discipline.</strong> The privacy invariant (§9) makes it structurally impossible for a private-intended post to become public without an explicit code change.</li>
             <li><strong>Vendored crypto libraries.</strong> All cryptographic primitives are either pinned or copied into the repository; library updates require a deliberate change.</li>
             <li><strong>Independent key-at-rest layer.</strong> The vault hierarchy (§3) means compromising any single server (Bluesky <em>or</em> Denazen) does not yield an offline brute-force target — an attacker needs material from both.</li>
