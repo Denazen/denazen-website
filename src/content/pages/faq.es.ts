@@ -61,11 +61,11 @@ export default {
       items: [
         {
           q: '¿Cuándo puedo unirme?',
-          a: ['Denazen está ahora mismo en un alpha pequeño solo por invitación. Únete a la lista de espera y te contactaremos a medida que abramos más invitaciones.'],
+          a: ['Denazen está ahora mismo en una beta pequeña solo por invitación. Únete a la lista de espera y te contactaremos a medida que abramos más invitaciones.'],
         },
         {
           q: '¿Cómo funciona el sistema de invitaciones?',
-          a: ['El alpha tiene un alcance reducido — 30 a 50 personas — para mantener al grupo unido mientras afinamos el producto. En la beta, los miembros existentes reciben códigos de invitación que pueden compartir con personas en las que confían. El crecimiento es impulsado por la red, no por la publicidad.'],
+          a: ['La beta solo por invitación tiene un alcance reducido para mantener al grupo unido mientras afinamos el producto. A medida que nos expandamos, los miembros existentes reciben códigos de invitación que pueden compartir con personas en las que confían. El crecimiento es impulsado por la red, no por la publicidad.'],
         },
         {
           q: '¿Es gratis?',

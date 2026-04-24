@@ -10,7 +10,7 @@ export default {
     lead: 'Some moments are just for your people.',
     encrypted: 'End-to-end encrypted by default.',
     waitlistButton: 'Request invite',
-    waitlistNote: 'Invite-only alpha. Early spots are limited.',
+    waitlistNote: 'Invite-only beta. Early spots are limited.',
     imageAltPublic: 'Denazen app on iPhone showing a public feed of posts from Bluesky.',
     imageAltPrivate:
       "Denazen app on iPhone showing a private feed, with a post tagged 'Shared with your Trusted Friends circle'.",
@@ -23,14 +23,14 @@ export default {
     heading: 'Explore public content without the noise',
     paragraphs: [
       'Denazen is built on Bluesky, so you plug straight into a vibrant network of 40+ million. Find your people and interests. Control your own feed.',
-      'Bring your own handle, or create one with Denazen. No ads. No sludge. No clickbait.It’s all under your control. ',
+      'Bring your own handle, or create one with Denazen. No ads. No sludge. No clickbait. It’s all under your control. ',
     ],
     imageAlt: "Denazen's public feed, with the Public and Private tabs visible at the top of the screen.",
   },
   privateSection: {
     heading: 'Share privately when it matters',
     paragraphs: [
-      'For the moments not everyone needs to see, Denazen adds a private layer to an otherwise public internet. Posts are encrypted on your device before they leave it. Only the people you trust can decrypt them.',
+      'For the moments not everyone needs to see, Denazen adds a private layer to social media. Posts are encrypted on your device before they leave it. Only the people you trust can decrypt them.',
       'No one else can see them. Not even us.',
     ],
     imageAlt:
@@ -82,7 +82,7 @@ export default {
     listItems: ['Ads', 'Behavioral trackers', 'AI training data'],
   },
   ctaSection: {
-    heading: 'Join the alpha',
+    heading: 'Join the beta',
     body:
       "Denazen is launching in a closed Beta. Drop your email and we'll let you know when a spot opens up.",
     waitlistButton: 'Request invite',

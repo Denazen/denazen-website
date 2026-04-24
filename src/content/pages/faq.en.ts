@@ -61,11 +61,11 @@ export default {
       items: [
         {
           q: 'When can I join?',
-          a: ["Denazen is in a small invite-only alpha right now. Join the waitlist and we'll reach out as we open up more invites."],
+          a: ["Denazen is in a small invite-only beta right now. Join the waitlist and we'll reach out as we open up more invites."],
         },
         {
           q: 'How does the invite system work?',
-          a: ['The alpha is tightly scoped — 30–50 people — to keep the group tight while we work out the product. In the beta, existing members get invite codes they can share with people they trust. Growth is network-driven, not ad-driven.'],
+          a: ['The invite-only beta is tightly scoped to keep the group close-knit while we work out the product. As we expand, existing members get invite codes they can share with people they trust. Growth is network-driven, not ad-driven.'],
         },
         {
           q: 'Is it free?',

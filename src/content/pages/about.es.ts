@@ -68,10 +68,10 @@ export default {
   whereWeAre: {
     heading: 'Dónde estamos',
     body:
-      'Denazen está en fase previa al lanzamiento, corriendo un alpha pequeño y solo por invitación. Si la propuesta te resuena, únete a la lista de espera — te contactaremos cuando se abra un lugar.',
+      'Denazen está en fase previa al lanzamiento, corriendo una beta pequeña y solo por invitación. Si la propuesta te resuena, únete a la lista de espera — te contactaremos cuando se abra un lugar.',
   },
   cta: {
-    heading: 'Únete al alpha',
+    heading: 'Únete a la beta',
     body: 'Grupos pequeños, invitaciones cerradas. Ayuda a dar forma a la capa privada de las redes sociales.',
     waitlistButton: 'Solicitar invitación',
   },

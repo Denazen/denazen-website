@@ -18,8 +18,8 @@ const img = (p: string) => localizeAsset(p, lang);
     <div class="hero-grid">
       <div class="hero-text">
         <h1 class="hero-headline">
-          <span class="hero-headline-public">{c.hero.headlinePublic}</span>
           <span class="hero-headline-private">{c.hero.headlinePrivate}</span>
+          <span class="hero-headline-public">{c.hero.headlinePublic}</span>
         </h1>
         <p class="lead">{c.hero.lead}</p>
         <p class="hero-encrypted">
@@ -48,31 +48,31 @@ const img = (p: string) => localizeAsset(p, lang);
   </div>
 </section>
 
-<!-- Public when you want -->
+<!-- Private when it matters -->
 <section>
   <div class="container">
     <div class="info-grid reversed">
-      <div class="info-text">
-        <h2>{c.publicSection.heading}</h2>
-        {c.publicSection.paragraphs.map((p) => <p>{p}</p>)}
-      </div>
-      <div class="info-visual">
-        <img src={img('/images/screenshots/feed-public.webp')} alt={c.publicSection.imageAlt} width="560" height="1111" />
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Private when it matters -->
-<section class="section-tint">
-  <div class="container">
-    <div class="info-grid">
       <div class="info-text">
         <h2>{c.privateSection.heading}</h2>
         {c.privateSection.paragraphs.map((p) => <p>{p}</p>)}
       </div>
       <div class="info-visual">
         <img src={img('/images/screenshots/private-network.webp')} alt={c.privateSection.imageAlt} width="560" height="1111" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Public when you want -->
+<section class="section-tint">
+  <div class="container">
+    <div class="info-grid">
+      <div class="info-text">
+        <h2>{c.publicSection.heading}</h2>
+        {c.publicSection.paragraphs.map((p) => <p>{p}</p>)}
+      </div>
+      <div class="info-visual">
+        <img src={img('/images/screenshots/feed-public.webp')} alt={c.publicSection.imageAlt} width="560" height="1111" />
       </div>
     </div>
   </div>

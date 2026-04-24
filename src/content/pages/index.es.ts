@@ -10,7 +10,7 @@ export default {
     lead: 'Algunos momentos son solo para tu gente.',
     encrypted: 'Cifrado de extremo a extremo por defecto.',
     waitlistButton: 'Solicitar invitación',
-    waitlistNote: 'Alpha solo por invitación. Los primeros lugares son limitados.',
+    waitlistNote: 'Beta solo por invitación. Los primeros lugares son limitados.',
     imageAltPublic: 'La app de Denazen en un iPhone mostrando un feed público de publicaciones de Bluesky.',
     imageAltPrivate:
       'La app de Denazen en un iPhone mostrando un feed privado, con una publicación etiquetada como "Compartida con tu círculo de amigos de confianza".',
@@ -30,7 +30,7 @@ export default {
   privateSection: {
     heading: 'Comparte en privado cuando importa',
     paragraphs: [
-      'Para los momentos que no todos necesitan ver, Denazen añade una capa privada a un internet que por defecto es público. Las publicaciones se cifran en tu dispositivo antes de salir de él. Solo las personas en las que confías pueden descifrarlas.',
+      'Para los momentos que no todos necesitan ver, Denazen añade una capa privada a las redes sociales. Las publicaciones se cifran en tu dispositivo antes de salir de él. Solo las personas en las que confías pueden descifrarlas.',
       'Nadie más puede verlas. Ni siquiera nosotros.',
     ],
     imageAlt:
@@ -82,7 +82,7 @@ export default {
     listItems: ['Anuncios', 'Rastreadores de comportamiento', 'Datos de entrenamiento de IA'],
   },
   ctaSection: {
-    heading: 'Únete al alpha',
+    heading: 'Únete a la beta',
     body:
       'Denazen está lanzando una Beta cerrada. Déjanos tu correo y te avisamos cuando se abra un lugar.',
     waitlistButton: 'Solicitar invitación',

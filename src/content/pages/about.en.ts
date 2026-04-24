@@ -68,10 +68,10 @@ export default {
   whereWeAre: {
     heading: 'Where we are',
     body:
-      "Denazen is pre-launch, running a small invite-only alpha. If the pitch resonates, join the waitlist — we'll reach out when a spot opens up.",
+      "Denazen is pre-launch, running a small invite-only beta. If the pitch resonates, join the waitlist — we'll reach out when a spot opens up.",
   },
   cta: {
-    heading: 'Join the alpha',
+    heading: 'Join the beta',
     body: 'Small groups, closed invites. Help shape the private layer of social media.',
     waitlistButton: 'Request invite',
   },
