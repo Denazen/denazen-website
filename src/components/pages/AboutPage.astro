@@ -1,0 +1,68 @@
+---
+import WaitlistForm from '../WaitlistForm.astro';
+import type { Lang } from '../../i18n/config';
+import { localizeAsset } from '../../i18n/assets';
+import type enContent from '../../content/pages/about.en';
+
+interface Props {
+  lang: Lang;
+  content: typeof enContent;
+}
+
+const { lang, content: c } = Astro.props;
+const img = (p: string) => localizeAsset(p, lang);
+---
+<section>
+  <div class="container-narrow">
+    <h1>{c.hero.heading}</h1>
+    <p class="lead mt-3">{c.hero.lead}</p>
+  </div>
+</section>
+
+<section class="section-tint">
+  <div class="container-narrow legal-content">
+    <h2>{c.problem.heading}</h2>
+    {c.problem.paragraphs.map((p) => <p set:html={p} />)}
+
+    <h2>{c.whyDenazen.heading}</h2>
+    <p>{c.whyDenazen.intro}</p>
+    <ul>
+      {c.whyDenazen.list.map((item) => (
+        <li><strong>{item.label}</strong>{item.body}</li>
+      ))}
+    </ul>
+    <p>{c.whyDenazen.trailing}</p>
+
+    <h2>{c.whyBuiltThisWay.heading}</h2>
+    {c.whyBuiltThisWay.paragraphs.map((p) => <p>{p}</p>)}
+
+    <h2>{c.pbc.heading}</h2>
+    {c.pbc.paragraphs.map((p) => <p>{p}</p>)}
+
+    <h2>{c.team.heading}</h2>
+    <p>{c.team.intro}</p>
+    {c.team.founders.map((f) => (
+      <div class="founder">
+        <img class="founder-photo" src={img(f.photo)} alt={f.photoAlt} width="96" height="96" />
+        <p><strong>{f.name}</strong>{f.bio}</p>
+      </div>
+    ))}
+
+    <h2>{c.whereWeAre.heading}</h2>
+    <p>{c.whereWeAre.body}</p>
+  </div>
+</section>
+
+<section class="section-dark">
+  <div class="container">
+    <div class="section-heading">
+      <h2>{c.cta.heading}</h2>
+      <p>{c.cta.body}</p>
+    </div>
+    <div style="display:flex; justify-content:center;">
+      <div>
+        <WaitlistForm lang={lang} id="waitlist-about" buttonLabel={c.cta.waitlistButton} />
+      </div>
+    </div>
+  </div>
+</section>

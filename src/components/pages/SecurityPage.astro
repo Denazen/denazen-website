@@ -1,0 +1,99 @@
+---
+import type { Lang } from '../../i18n/config';
+import { localizePath } from '../../i18n/utils';
+import type enContent from '../../content/pages/security.en';
+
+interface Props {
+  lang: Lang;
+  content: typeof enContent;
+}
+
+const { lang, content: c } = Astro.props;
+---
+<section>
+  <div class="container-narrow legal-content">
+    <h1>{c.heading}</h1>
+    <aside class="draft-notice" role="note">
+      <strong>{c.draftNotice.title}</strong>
+      <p>{c.draftNotice.body}</p>
+    </aside>
+    <p class="lead mt-3">
+      {c.leadBefore}<a href={localizePath('/security/architecture/', lang)}>{c.leadArchitectureLink}</a>{c.leadAfter}
+    </p>
+    <p>{c.intro}</p>
+
+    <h2>{c.reporting.heading}</h2>
+    <p>
+      {c.reporting.p1Before}<strong><a href={`mailto:${c.reporting.reportEmail}`}>{c.reporting.reportEmail}</a></strong>{c.reporting.p1After}
+    </p>
+    <p>{c.reporting.p2}</p>
+    <p>
+      {c.reporting.p3Before}<a href="/.well-known/security.txt"><code>{c.reporting.securityTxtLinkText}</code></a>{c.reporting.p3Between}<a href="https://www.rfc-editor.org/rfc/rfc9116.html" rel="noopener">{c.reporting.rfcLinkText}</a>{c.reporting.p3After}
+    </p>
+
+    <h2>{c.whatToInclude.heading}</h2>
+    <ul>
+      {c.whatToInclude.list.map((item) => <li>{item}</li>)}
+    </ul>
+    <p>{c.whatToInclude.trailing}</p>
+
+    <h2>{c.whatWellDo.heading}</h2>
+    <ol>
+      {c.whatWellDo.steps.map((step) => <li>{step}</li>)}
+      <li>
+        {c.whatWellDo.step5Before}<a href={localizePath('/security/acknowledgments/', lang)}>{c.whatWellDo.step5Link}</a>{c.whatWellDo.step5After}
+      </li>
+    </ol>
+
+    <h2>{c.scope.heading}</h2>
+    <h3>{c.scope.inScopeHeading}</h3>
+    <ul>
+      {c.scope.inScope.map((item) => {
+        if (item.kind === 'linked') {
+          return (
+            <li>
+              {item.before}<a href={localizePath('/security/architecture/', lang)}>{item.linkText}</a>{item.after}
+            </li>
+          );
+        }
+        if (item.kind === 'code') {
+          return (
+            <li>{item.before}<code>{item.code}</code>{item.after}</li>
+          );
+        }
+        return <li>{item.text}</li>;
+      })}
+    </ul>
+
+    <h3>{c.scope.outOfScopeHeading}</h3>
+    <ul>
+      {c.scope.outOfScope.map((item) => <li>{item}</li>)}
+    </ul>
+    <p>
+      {c.scope.askBefore}<a href={`mailto:${c.reporting.reportEmail}`}>{c.reporting.reportEmail}</a>{c.scope.askAfter}
+    </p>
+
+    <h2>{c.safeHarbor.heading}</h2>
+    <p>{c.safeHarbor.intro}</p>
+    <ul>
+      {c.safeHarbor.considerations.map((item) => <li>{item}</li>)}
+    </ul>
+    <p>{c.safeHarbor.noPursuit}</p>
+    <ul>
+      {c.safeHarbor.conditions.map((item) => <li>{item}</li>)}
+    </ul>
+
+    <h2>{c.bugBounty.heading}</h2>
+    <p>{c.bugBounty.body}</p>
+
+    <h2>{c.acknowledgments.heading}</h2>
+    <p>
+      {c.acknowledgments.before}<a href={localizePath('/security/acknowledgments/', lang)}>{c.acknowledgments.linkText}</a>{c.acknowledgments.after}
+    </p>
+
+    <h2>{c.changelog.heading}</h2>
+    <p>
+      {c.changelog.before}<a href={localizePath('/security/changelog/', lang)}>{c.changelog.linkText}</a>{c.changelog.after}
+    </p>
+  </div>
+</section>

@@ -1,0 +1,65 @@
+---
+import type { Lang } from '../../i18n/config';
+
+interface ListItem {
+  label?: string;
+  body: string;
+}
+
+interface Section {
+  heading: string;
+  paragraphs?: string[];
+  list?: ListItem[];
+  trailingParagraphs?: string[];
+  contactEmail?: string;
+}
+
+interface Content {
+  heading: string;
+  lastUpdatedLabel: string;
+  lastUpdatedDate: string;
+  lastUpdatedText: string;
+  placeholderNotice: string;
+  sections: Section[];
+}
+
+interface Props {
+  lang: Lang;
+  content: Content;
+}
+
+const { content: c } = Astro.props;
+---
+<section>
+  <div class="container-narrow legal-content">
+    <h1>{c.heading}</h1>
+    <p class="legal-meta">{c.lastUpdatedLabel}<time datetime={c.lastUpdatedDate}>{c.lastUpdatedText}</time></p>
+
+    <p><em>{c.placeholderNotice}</em></p>
+
+    {c.sections.map((s) => (
+      <>
+        <h2>{s.heading}</h2>
+        {s.paragraphs?.map((p, i) => (
+          <p>
+            {p}
+            {i === s.paragraphs!.length - 1 && s.contactEmail && (
+              <a href={`mailto:${s.contactEmail}`}>{s.contactEmail}</a>
+            )}
+          </p>
+        ))}
+        {s.list && (
+          <ul>
+            {s.list.map((item) => (
+              <li>
+                {item.label && <strong>{item.label}</strong>}
+                {item.body}
+              </li>
+            ))}
+          </ul>
+        )}
+        {s.trailingParagraphs?.map((p) => <p>{p}</p>)}
+      </>
+    ))}
+  </div>
+</section>

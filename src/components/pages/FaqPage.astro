@@ -1,0 +1,46 @@
+---
+import WaitlistForm from '../WaitlistForm.astro';
+import type { Lang } from '../../i18n/config';
+import type enContent from '../../content/pages/faq.en';
+
+interface Props {
+  lang: Lang;
+  content: typeof enContent;
+}
+
+const { lang, content: c } = Astro.props;
+---
+<section>
+  <div class="container-narrow">
+    <h1>{c.heading}</h1>
+    <p class="lead mt-3">{c.lead}</p>
+
+    <div class="faq">
+      {c.groups.map((g) => (
+        <div class="faq-group">
+          <h2>{g.heading}</h2>
+          {g.items.map((item) => (
+            <details>
+              <summary>{item.q}</summary>
+              {item.a.map((p) => <p>{p}</p>)}
+            </details>
+          ))}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="section-dark">
+  <div class="container">
+    <div class="section-heading">
+      <h2>{c.cta.heading}</h2>
+      <p>{c.cta.body}</p>
+    </div>
+    <div style="display:flex; justify-content:center;">
+      <div>
+        <WaitlistForm lang={lang} id="waitlist-faq" buttonLabel={c.cta.waitlistButton} />
+      </div>
+    </div>
+  </div>
+</section>

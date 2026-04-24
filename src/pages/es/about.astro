@@ -1,0 +1,8 @@
+---
+import Base from '../../layouts/Base.astro';
+import AboutPage from '../../components/pages/AboutPage.astro';
+import content from '../../content/pages/about.es';
+---
+<Base title={content.meta.title} description={content.meta.description} pathname="/es/about/" lang="es">
+  <AboutPage lang="es" content={content} />
+</Base>

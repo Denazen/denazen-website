@@ -1,0 +1,23 @@
+---
+import type { Lang } from '../../i18n/config';
+import { localizePath } from '../../i18n/utils';
+import type enContent from '../../content/pages/security-acknowledgments.en';
+
+interface Props {
+  lang: Lang;
+  content: typeof enContent;
+}
+
+const { lang, content: c } = Astro.props;
+---
+<section>
+  <div class="container-narrow legal-content">
+    <h1>{c.heading}</h1>
+    <p class="lead mt-3">{c.lead}</p>
+    <p><em>{c.emptyNotice}</em></p>
+    <p>{c.askToBeListed}</p>
+    <p class="mt-4">
+      {c.seePolicyPrefix}<a href={localizePath('/security/', lang)}>{c.seePolicyLink}</a>{c.seePolicySuffix}
+    </p>
+  </div>
+</section>

@@ -1,0 +1,35 @@
+---
+import type { Lang } from '../../i18n/config';
+import { localizePath } from '../../i18n/utils';
+import type enContent from '../../content/pages/security-changelog.en';
+
+interface Props {
+  lang: Lang;
+  content: typeof enContent;
+}
+
+const { lang, content: c } = Astro.props;
+---
+<section>
+  <div class="container-narrow legal-content">
+    <h1>{c.heading}</h1>
+    <aside class="draft-notice" role="note">
+      <strong>{c.draftNotice.title}</strong>
+      <p>{c.draftNotice.body}</p>
+    </aside>
+    <p class="lead mt-3">
+      {c.leadBefore}<a href={localizePath('/security/', lang)}>{c.leadPolicyLink}</a>{c.leadBetweenPolicyAndArchitecture}<a href={localizePath('/security/architecture/', lang)}>{c.leadArchitectureLink}</a>{c.leadBetweenArchitectureAndSecurityTxt}<a href="/.well-known/security.txt">{c.leadSecurityTxtLink}</a>{c.leadAfter}
+    </p>
+    <p>{c.reviewerNote}</p>
+
+    <hr />
+
+    <p><em>{c.empty}</em></p>
+
+    <hr />
+
+    <p>
+      <em>{c.footerBefore}<a href={localizePath('/security/architecture/', lang)}>{c.footerArchitectureLink}</a>{c.footerBetween}<a href={localizePath('/security/', lang)}>{c.footerPolicyLink}</a>{c.footerAfter}</em>
+    </p>
+  </div>
+</section>
