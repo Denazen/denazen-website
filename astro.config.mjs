@@ -6,6 +6,13 @@ export default defineConfig({
   build: {
     format: 'directory'
   },
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'es'],
+    routing: {
+      prefixDefaultLocale: false
+    }
+  },
   vite: {
     server: {
       allowedHosts: ['.trycloudflare.com', '.ngrok-free.app', '.ngrok.app']

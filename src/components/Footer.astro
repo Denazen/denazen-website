@@ -1,53 +1,62 @@
 ---
+import { defaultLang, type Lang } from '../i18n/config';
+import { useTranslations, localizePath } from '../i18n/utils';
+import { localizeAsset } from '../i18n/assets';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = defaultLang } = Astro.props;
+const t = useTranslations(lang);
 const year = new Date().getFullYear();
 ---
 <footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="/" class="brand" aria-label="Denazen home">
-          <img src="/images/brand/fox.png" alt="" class="brand-fox" width="40" height="40" />
+        <a href={localizePath('/', lang)} class="brand" aria-label={t('nav.brandAria')}>
+          <img src={localizeAsset('/images/brand/fox.png', lang)} alt="" class="brand-fox" width="40" height="40" />
           <span class="brand-text">Denazen</span>
         </a>
-        <p>Public when you want. Private when it matters. A privacy-first social network built on Bluesky.</p>
+        <p>{t('footer.tagline')}</p>
       </div>
 
       <div class="footer-col">
-        <h4>Product</h4>
+        <h4>{t('footer.product')}</h4>
         <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/faq/">FAQ</a></li>
+          <li><a href={localizePath('/', lang)}>{t('footer.home')}</a></li>
+          <li><a href={localizePath('/faq/', lang)}>{t('footer.faq')}</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
-        <h4>Company</h4>
+        <h4>{t('footer.company')}</h4>
         <ul>
-          <li><a href="/about/">About</a></li>
-          <li><a href="/#waitlist">Join the alpha</a></li>
+          <li><a href={localizePath('/about/', lang)}>{t('footer.about')}</a></li>
+          <li><a href={`${localizePath('/', lang)}#waitlist`}>{t('footer.joinAlpha')}</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
-        <h4>Legal</h4>
+        <h4>{t('footer.legal')}</h4>
         <ul>
-          <li><a href="/privacy/">Privacy</a></li>
-          <li><a href="/terms/">Terms</a></li>
+          <li><a href={localizePath('/privacy/', lang)}>{t('footer.privacy')}</a></li>
+          <li><a href={localizePath('/terms/', lang)}>{t('footer.terms')}</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
-        <h4>Connect</h4>
+        <h4>{t('footer.connect')}</h4>
         <ul>
-          <li><a href="https://bsky.app" target="_blank" rel="noopener">Bluesky</a></li>
-          <li><a href="https://github.com" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://bsky.app" target="_blank" rel="noopener">{t('footer.bluesky')}</a></li>
+          <li><a href="https://github.com" target="_blank" rel="noopener">{t('footer.github')}</a></li>
         </ul>
       </div>
     </div>
 
     <div class="footer-bottom">
-      <span>© {year} Denazen. All rights reserved.</span>
-      <span>Built on the AT Protocol.</span>
+      <span>© {year} Denazen. {t('footer.rights')}</span>
+      <span>{t('footer.builtOn')}</span>
     </div>
   </div>
 </footer>

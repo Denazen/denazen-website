@@ -2,12 +2,16 @@
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
+import { defaultLang, type Lang } from '../i18n/config';
+import { useTranslations, getAlternateUrls, stripLangFromPath } from '../i18n/utils';
+import { localizeAsset } from '../i18n/assets';
 
 interface Props {
   title: string;
   description?: string;
   ogImage?: string;
   pathname?: string;
+  lang?: Lang;
 }
 
 const {
@@ -15,19 +19,30 @@ const {
   description = 'Public when you want. Private when it matters. A privacy-first social network built on Bluesky, with end-to-end encrypted circles.',
   ogImage = '/images/og-default.png',
   pathname,
+  lang = defaultLang,
 } = Astro.props;
 
-const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://www.denazen.com').href;
+const t = useTranslations(lang);
+const site = Astro.site ?? new URL('https://www.denazen.com');
+const canonical = new URL(Astro.url.pathname, site).href;
 const currentPath = pathname ?? Astro.url.pathname;
+const langlessPath = stripLangFromPath(currentPath);
+const alternates = getAlternateUrls(currentPath, site);
+const xDefault = alternates.find((a) => a.lang === defaultLang)?.href;
+const ogImageResolved = localizeAsset(ogImage, lang);
 ---
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    {alternates.map((a) => (
+      <link rel="alternate" hreflang={a.lang} href={a.href} />
+    ))}
+    {xDefault && <link rel="alternate" hreflang="x-default" href={xDefault} />}
 
     <link rel="icon" type="image/png" href="/favicon/icon.png" />
     <link rel="apple-touch-icon" href="/favicon/icon.png" />
@@ -37,22 +52,23 @@ const currentPath = pathname ?? Astro.url.pathname;
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={ogImage} />
+    <meta property="og:image" content={ogImageResolved} />
+    <meta property="og:locale" content={lang === 'es' ? 'es_ES' : 'en_US'} />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image" content={ogImageResolved} />
 
     <link rel="preload" href="/fonts/inter/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/inter/Inter-ExtraBold.woff2" as="font" type="font/woff2" crossorigin />
   </head>
   <body>
-    <a href="#main" class="sr-only">Skip to content</a>
-    <Nav currentPath={currentPath} />
+    <a href="#main" class="sr-only">{t('nav.skipToContent')}</a>
+    <Nav lang={lang} currentPath={currentPath} langlessPath={langlessPath} />
     <main id="main">
       <slot />
     </main>
-    <Footer />
+    <Footer lang={lang} />
   </body>
 </html>

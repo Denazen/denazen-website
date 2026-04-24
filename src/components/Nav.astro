@@ -1,19 +1,27 @@
 ---
+import { defaultLang, locales, type Lang } from '../i18n/config';
+import { useTranslations, localizePath, stripLangFromPath } from '../i18n/utils';
+import { localizeAsset } from '../i18n/assets';
+
 interface Props {
   currentPath: string;
+  lang?: Lang;
+  langlessPath?: string;
 }
-const { currentPath } = Astro.props;
+const { currentPath, lang = defaultLang, langlessPath } = Astro.props;
+const t = useTranslations(lang);
+const basePath = langlessPath ?? stripLangFromPath(currentPath);
 
 const links = [
-  { href: '/', label: 'Home', mobileOnly: true },
-  { href: '/about/', label: 'About' },
-  { href: '/faq/', label: 'FAQ' },
-  { href: '/security/', label: 'Security' },
+  { key: 'nav.home' as const, path: '/', mobileOnly: true },
+  { key: 'nav.about' as const, path: '/about/' },
+  { key: 'nav.faq' as const, path: '/faq/' },
+  { key: 'nav.security' as const, path: '/security/' },
 ];
 
-const isActive = (href: string) => {
-  if (href === '/') return currentPath === '/';
-  return currentPath.startsWith(href);
+const isActive = (path: string) => {
+  if (path === '/') return basePath === '/';
+  return basePath.startsWith(path);
 };
 
 const linkClass = (link: { mobileOnly?: boolean }, active: boolean) =>
@@ -23,14 +31,14 @@ const linkClass = (link: { mobileOnly?: boolean }, active: boolean) =>
 ---
 <header class="site-nav">
   <div class="container site-nav-inner">
-    <a href="/" class="brand" aria-label="Denazen home">
-      <img src="/images/brand/fox-64.png" alt="" class="brand-fox" width="32" height="32" />
+    <a href={localizePath('/', lang)} class="brand" aria-label={t('nav.brandAria')}>
+      <img src={localizeAsset('/images/brand/fox-64.png', lang)} alt="" class="brand-fox" width="32" height="32" />
       <span class="brand-text">Denazen</span>
     </a>
     <button
       class="nav-toggle"
       type="button"
-      aria-label="Toggle navigation"
+      aria-label={t('nav.toggleAria')}
       aria-expanded="false"
       aria-controls="primary-nav"
       data-nav-toggle
@@ -41,11 +49,21 @@ const linkClass = (link: { mobileOnly?: boolean }, active: boolean) =>
         <line x1="3" y1="18" x2="21" y2="18"></line>
       </svg>
     </button>
-    <nav id="primary-nav" class="nav-links" aria-label="Primary">
+    <nav id="primary-nav" class="nav-links" aria-label={t('nav.primaryAria')}>
       {links.map((l) => (
-        <a href={l.href} class={linkClass(l, isActive(l.href))} aria-current={isActive(l.href) ? 'page' : undefined}>{l.label}</a>
+        <a href={localizePath(l.path, lang)} class={linkClass(l, isActive(l.path))} aria-current={isActive(l.path) ? 'page' : undefined}>{t(l.key)}</a>
       ))}
-      <a href="/#waitlist" class="btn btn-primary">Request invite</a>
+      <div class="lang-switcher" role="group" aria-label={t('nav.languageAria')}>
+        {locales.map((loc) => (
+          <a
+            href={localizePath(basePath, loc)}
+            class={`lang-link ${loc === lang ? 'active' : ''}`}
+            hreflang={loc}
+            aria-current={loc === lang ? 'true' : undefined}
+          >{loc.toUpperCase()}</a>
+        ))}
+      </div>
+      <a href={`${localizePath('/', lang)}#waitlist`} class="btn btn-primary">{t('nav.requestInvite')}</a>
     </nav>
   </div>
 </header>

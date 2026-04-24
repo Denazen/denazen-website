@@ -1,35 +1,59 @@
 ---
+import { defaultLang, type Lang } from '../i18n/config';
+import { useTranslations } from '../i18n/utils';
+
 interface Props {
   buttonLabel?: string;
   note?: string;
   id?: string;
+  lang?: Lang;
 }
 
-const {
-  buttonLabel = 'Request invite',
-  note = 'Invite-only alpha. We\u2019ll email you when a spot opens.',
-  id = 'waitlist',
-} = Astro.props;
+const { id = 'waitlist', lang = defaultLang, buttonLabel, note } = Astro.props;
+const t = useTranslations(lang);
+const resolvedButton = buttonLabel ?? t('waitlist.buttonDefault');
+const resolvedNote = note ?? t('waitlist.noteDefault');
 ---
-<form class="waitlist" action="/api/waitlist" method="POST" id={id} novalidate>
-  <label for={`${id}-email`} class="sr-only">Email address</label>
+<form
+  class="waitlist"
+  action="/api/waitlist"
+  method="POST"
+  id={id}
+  novalidate
+  data-msg-empty={t('waitlist.errorEmpty')}
+  data-msg-submitting={t('waitlist.submitting')}
+  data-msg-generic={t('waitlist.errorGeneric')}
+  data-msg-network={t('waitlist.errorNetwork')}
+  data-msg-success-title={t('waitlist.successTitle')}
+  data-msg-success-body={t('waitlist.successBody')}
+>
+  <label for={`${id}-email`} class="sr-only">{t('waitlist.emailAria')}</label>
   <input
     id={`${id}-email`}
     name="email"
     type="email"
     required
-    placeholder="you@email.com"
+    placeholder={t('waitlist.placeholder')}
     autocomplete="email"
     spellcheck="false"
   />
-  <button type="submit" class="btn btn-primary">{buttonLabel}</button>
+  <button type="submit" class="btn btn-primary">{resolvedButton}</button>
 </form>
-<p class="waitlist-note">{note}</p>
+<p class="waitlist-note">{resolvedNote}</p>
 
 <script>
   const forms = document.querySelectorAll<HTMLFormElement>('form.waitlist');
 
   forms.forEach((form) => {
+    const msgs = {
+      empty: form.dataset.msgEmpty ?? 'Please enter your email.',
+      submitting: form.dataset.msgSubmitting ?? 'Submitting…',
+      generic: form.dataset.msgGeneric ?? 'Something went wrong. Please try again.',
+      network: form.dataset.msgNetwork ?? 'Network error. Please try again.',
+      successTitle: form.dataset.msgSuccessTitle ?? 'You’re on the list.',
+      successBody: form.dataset.msgSuccessBody ?? 'We’ll be in touch when your invite is ready.',
+    };
+
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
 
@@ -39,7 +63,7 @@ const {
 
       const email = input.value.trim();
       if (!email) {
-        showError(form, 'Please enter your email.');
+        showError(form, msgs.empty);
         return;
       }
 
@@ -47,7 +71,7 @@ const {
       const originalLabel = button.textContent;
       button.disabled = true;
       input.disabled = true;
-      button.textContent = 'Submitting\u2026';
+      button.textContent = msgs.submitting;
 
       try {
         const response = await fetch('/api/waitlist', {
@@ -61,12 +85,12 @@ const {
         const data = (await response.json().catch(() => ({}))) as { ok?: boolean; error?: string };
 
         if (response.ok && data.ok) {
-          showSuccess(form);
+          showSuccess(form, msgs.successTitle, msgs.successBody);
           return;
         }
-        showError(form, data.error ?? 'Something went wrong. Please try again.');
+        showError(form, data.error ?? msgs.generic);
       } catch {
-        showError(form, 'Network error. Please try again.');
+        showError(form, msgs.network);
       } finally {
         if (form.isConnected) {
           button.disabled = false;
@@ -77,12 +101,15 @@ const {
     });
   });
 
-  function showSuccess(form: HTMLFormElement) {
+  function showSuccess(form: HTMLFormElement, title: string, body: string) {
     const note = form.nextElementSibling as HTMLElement | null;
     const success = document.createElement('div');
     success.className = 'waitlist-success';
     success.setAttribute('role', 'status');
-    success.innerHTML = '<strong>\u2713 You\u2019re on the list.</strong> We\u2019ll be in touch when your invite is ready.';
+    const strong = document.createElement('strong');
+    strong.textContent = `✓ ${title}`;
+    success.appendChild(strong);
+    success.appendChild(document.createTextNode(' ' + body));
     form.replaceWith(success);
     if (note && note.classList.contains('waitlist-note')) note.remove();
   }
