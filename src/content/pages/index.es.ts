@@ -11,6 +11,8 @@ export default {
     encrypted: 'Cifrado de extremo a extremo por defecto.',
     waitlistButton: 'Solicitar invitación',
     waitlistNote: 'Beta solo por invitación. Los primeros lugares son limitados.',
+    trustPillTitle: 'Tú eliges quién ve qué.',
+    trustPillBody: 'Una capa privada para tu vida social.',
     imageAltPublic: 'La app de Denazen en un iPhone mostrando un feed público de publicaciones de Bluesky.',
     imageAltPrivate:
       'La app de Denazen en un iPhone mostrando un feed privado, con una publicación etiquetada como "Compartida con tu círculo de amigos de confianza".',
