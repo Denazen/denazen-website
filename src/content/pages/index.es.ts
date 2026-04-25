@@ -1,17 +1,21 @@
 export default {
   meta: {
-    title: 'Denazen — Si las redes sociales empezaran de cero hoy',
+    title: 'Denazen — Lo mejor de lo que podrían ser las redes sociales',
     description:
       'Una red social hecha para relaciones reales—con espacios privados, control real y sin anuncios ni rastreo.',
   },
   hero: {
-    heading: 'Si las redes sociales empezaran de cero hoy, así se verían.',
+    heading: 'Lo mejor de lo que podrían ser las redes sociales.',
+    rotator: {
+      prefix: 'La conexión del ',
+      words: ['Facebook', 'Instagram'],
+      suffix: ' de los primeros días.',
+    },
     lines: [
-      'La conexión del Facebook/Instagram de los primeros días.',
       'La privacidad de Signal.',
       'La libertad de Bluesky.',
     ],
-    tagline: 'Conexión real. Privacidad real. Control real.',
+    tagline: ['Público cuando quieras.', 'Privado cuando importa.'],
     waitlistButton: 'Solicitar invitación',
     waitlistNote: 'En una beta solo por invitación.',
     imagePublic: {

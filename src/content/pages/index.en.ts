@@ -1,17 +1,21 @@
 export default {
   meta: {
-    title: 'Denazen — If social media started over today',
+    title: 'Denazen — The best of what social media could be',
     description:
       'A social network built for real relationships—with private spaces, real control, and no ads or tracking.',
   },
   hero: {
-    heading: 'If social media started over today, this is what it would look like.',
+    heading: 'The best of what social media could be',
+    rotator: {
+      prefix: 'The connection of early ',
+      words: ['Facebook', 'Instagram'],
+      suffix: '.',
+    },
     lines: [
-      'The connection of early Facebook/Instagram.',
       'The privacy of Signal.',
       'The freedom of Bluesky.',
     ],
-    tagline: 'Real connection. Real privacy. Real control.',
+    tagline: ['Public when you want.', 'Private when it matters.'],
     waitlistButton: 'Request invite',
     waitlistNote: "It's in an invite-only Beta.",
     imagePublic: {

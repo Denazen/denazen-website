@@ -19,6 +19,14 @@ const img = (p: string) => localizeAsset(p, lang);
       <div class="home-text">
         <h1>{c.hero.heading}</h1>
         <p class="home-hero-lines">
+          <span class="home-hero-rotator-line">
+            {c.hero.rotator.prefix}<span class="word-rotator">
+              {c.hero.rotator.words.map((w, i) => (
+                <span class={`word${i === 0 ? ' is-active' : ''}`}>{w}</span>
+              ))}
+            </span>{c.hero.rotator.suffix}
+          </span>
+          <br />
           {c.hero.lines.map((line, i) => (
             <>
               {line}
@@ -26,7 +34,14 @@ const img = (p: string) => localizeAsset(p, lang);
             </>
           ))}
         </p>
-        <p class="home-hero-tagline">{c.hero.tagline}</p>
+        <p class="home-hero-tagline">
+          {c.hero.tagline.map((line, i) => (
+            <>
+              {line}
+              {i < c.hero.tagline.length - 1 && <br />}
+            </>
+          ))}
+        </p>
         <div class="home-hero-cta">
           <WaitlistForm lang={lang} id="waitlist" buttonLabel={c.hero.waitlistButton} note={c.hero.waitlistNote} />
         </div>
@@ -101,3 +116,18 @@ const img = (p: string) => localizeAsset(p, lang);
     {c.values.paragraphs.map((p) => <p>{p}</p>)}
   </div>
 </section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.word-rotator').forEach((rotator) => {
+    const words = Array.from(rotator.querySelectorAll<HTMLElement>('.word'));
+    if (words.length < 2) return;
+    let active = 0;
+    setInterval(() => {
+      words[active].classList.remove('is-active');
+      words[active].classList.add('was-active');
+      active = (active + 1) % words.length;
+      words[active].classList.remove('was-active');
+      words[active].classList.add('is-active');
+    }, 3000);
+  });
+</script>
