@@ -38,8 +38,8 @@ export default {
       'Sin anuncios. Sin rastreo. Sin manipulación',
     ],
     image: {
-      src: '/images/screenshots/feed-public.webp',
-      alt: 'El feed público de Denazen, con las pestañas Público y Privado visibles en la parte superior de la pantalla.',
+      src: '/images/screenshots/hero-private.webp',
+      alt: 'El feed privado de Denazen mostrando una publicación de fin de semana familiar compartida con el círculo de Amigos de Confianza del usuario.',
     },
   },
   privacy: {

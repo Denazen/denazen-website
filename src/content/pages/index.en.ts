@@ -38,8 +38,8 @@ export default {
       'No ads. No tracking. No manipulation',
     ],
     image: {
-      src: '/images/screenshots/feed-public.webp',
-      alt: "Denazen's public feed, with the Public and Private tabs visible at the top of the screen.",
+      src: '/images/screenshots/hero-private.webp',
+      alt: "Denazen's private feed showing a family weekend post shared with the user's Trusted Friends circle.",
     },
   },
   privacy: {
