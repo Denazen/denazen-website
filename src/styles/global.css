@@ -450,7 +450,7 @@ section { padding-block: var(--section-pad); }
   z-index: 2;
 }
 @media (max-width: 820px) {
-  .home-hero-visual img { width: 48%; }
+  .home-hero-visual img { width: 56%; }
 }
 .home-hero-lines {
   font-size: clamp(1.25rem, 1.8vw, 1.5rem);
