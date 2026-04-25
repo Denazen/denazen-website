@@ -32,3 +32,4 @@ pnpm-debug.log*
 
 # Uncompressed source mockups (kept local; committed versions in public/images/screenshots/)
 apple-iphone-*-mockup/
+product_images/
