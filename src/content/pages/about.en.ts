@@ -1,74 +1,88 @@
 export default {
   meta: {
     title: 'About — Denazen',
-    description: "Why we're building Denazen: a social network where privacy is the default, not a setting.",
+    description:
+      "Why we're building Denazen: a privacy-first social app where you can live publicly online without giving up a private life.",
   },
   hero: {
-    heading: 'A social network where privacy is the default.',
-    lead: "Most people don't post what they really think. Not because they have nothing to say — but because they know who's watching, and it isn't just the people they want to talk to.",
+    heading: 'About Denazen',
+    lead: 'Denazen is a privacy-first social app built around a simple idea:',
+    pullQuote: 'You should be able to live publicly online without giving up a private life.',
+    body: 'Most social platforms are built around attention, advertising, and data collection. Denazen is built around choice: private when it matters, public when you choose.',
   },
-  problem: {
-    heading: 'The problem',
+  whyBuilt: {
+    heading: 'Why we built it',
     paragraphs: [
-      'Mainstream social media collapsed every relationship we have into one audience. Family, coworkers, close friends, strangers, algorithms, advertisers — everyone reads the same post. So we self-censor. We perform. We share the safe version, or we don\'t share at all.',
-      'Encrypted messaging apps (like Signal) solved the private side of this, but they\'re disconnected from the social side. Group chats are for direct conversation, not for sharing a photo with "the people who\'d care about this." There\'s no way to live publicly online <em>and</em> keep a private life with specific people — at the same time, in the same app.',
-      "There's another layer: whatever you post on mainstream platforms doesn't just reach people — it feeds ad profiles, data-broker dossiers, and AI models training on whatever they can scrape. What you share becomes someone else's asset. Denazen is designed so private content simply never does.",
+      'Social media has become too public, too permanent, and too optimized for everyone except the people using it.',
+      'People still want to share. They still want connection. But they also want boundaries.',
+      'Denazen exists to make those boundaries normal again.',
     ],
   },
-  whyDenazen: {
-    heading: 'Why Denazen',
-    intro: 'Denazen splits the network into two layers:',
+  whatMakesDifferent: {
+    heading: 'What makes us different',
+    intro: 'Denazen brings together two things that usually live apart:',
     list: [
-      {
-        label: 'Public:',
-        body: ' standard Bluesky. Open, discoverable, portable. Bring your handle; post like always.',
-      },
-      {
-        label: 'Private:',
-        body: ' end-to-end encrypted circles. Share with exactly the people you choose. Nobody else — not the network, not the servers, not us — can read it.',
-      },
+      'a public social network, built on the open AT Protocol',
+      'private, end-to-end encrypted circles for the people you choose',
     ],
-    trailing:
-      "The private layer isn't a promise we're asking you to trust. It's built on cryptography: content is encrypted on your device before it leaves, with keys only your chosen recipients hold. Remove someone from a circle and they lose access for real.",
+    trailingParagraphs: [
+      'That means you can participate in the wider social web while keeping some moments just for your people.',
+      'Not hidden behind a policy. Built into the architecture.',
+    ],
   },
-  whyBuiltThisWay: {
-    heading: "Why it's built this way",
+  howPrivacy: {
+    heading: 'How we think about privacy',
     paragraphs: [
-      "We picked the AT Protocol because it's open, portable, and not owned by anyone. You can take your identity somewhere else if we stop being worth using. That's the right default for a social network, and it's the opposite of how most platforms work.",
-      'We picked end-to-end encryption because "we respect your privacy" isn\'t enough. The only honest way to promise we can\'t read your posts is to make it cryptographically impossible.',
+      "We don't believe privacy should depend on corporate promises.",
+      'Private posts are encrypted before they leave your device. Not the servers, not the network, and not even Denazen can read them.',
+      "That's the standard we think social products should meet.",
+    ],
+  },
+  alignment: {
+    heading: 'Built to stay aligned',
+    paragraphs: [
+      'Denazen is designed to remain independent.',
+      "We're building a business funded by the people who use the platform — not by advertising, data collection, or outside incentives that conflict with user trust.",
+      'That independence is what allows us to prioritize privacy long-term.',
     ],
   },
   pbc: {
-    heading: 'A public benefit corporation',
+    heading: 'A different kind of company',
     paragraphs: [
-      "Denazen is a Public Benefit Corporation. The structure legally binds us to pursue a public mission — so the privacy-first commitment isn't just talk. It's load-bearing to the company's charter.",
-      "The business model follows from that. We don't sell data and we don't run ads. Denazen is funded by the people who use the platform, not by what they can be manipulated into seeing. A portion of profits is committed, from day one, to charitable work — protecting natural ecosystems and supporting vulnerable communities — and will grow as we do.",
+      'Denazen is a Public Benefit Corporation.',
+      "That means we're legally bound to pursue a mission — not just growth.",
+    ],
+    list: ["We don't sell data.", "We don't run ads."],
+    trailingParagraphs: [
+      'Our goal is to make online life feel safer, more honest, and more human.',
     ],
   },
   team: {
     heading: 'Who we are',
-    intro: 'Denazen is built by two people.',
+    intro: 'Denazen is built by a small, focused team.',
     founders: [
       {
         photo: '/images/team/cory.webp',
         photoAlt: 'Cory Welch',
         name: 'Cory Welch.',
         bio:
-          ' Engineering and business graduate degrees from MIT. Spent his career on the clean-energy transition. Started Denazen because the social-media landscape is broken and it\'s the next thing that needs fixing.',
+          ' MIT-trained engineer and business graduate. Spent his career working on the clean-energy transition. Started Denazen to rebuild a social internet that no longer feels safe or honest.',
       },
       {
         photo: '/images/team/ian.webp',
         photoAlt: 'Ian Tassin',
         name: 'Ian Tassin.',
         bio:
-          ' PhD student in computer science at Oregon State. Originator of the idea and the initial encryption architecture. Believes privacy is a right, not a feature.',
+          ' PhD student in computer science at Oregon State. Designed the original concept and encryption architecture. Believes privacy should be built in from the start.',
       },
     ],
   },
   whereWeAre: {
     heading: 'Where we are',
-    body:
-      "Denazen is pre-launch, running a small invite-only beta. If the pitch resonates, join the waitlist — we'll reach out when a spot opens up.",
+    paragraphs: [
+      'Denazen is currently in a small, invite-only beta.',
+      "If this resonates, join the waitlist. We'll reach out as spots open up.",
+    ],
   },
   cta: {
     heading: 'Join the beta',

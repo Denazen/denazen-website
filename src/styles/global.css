@@ -122,6 +122,15 @@ p.lead {
   color: var(--c-text-soft);
   line-height: 1.55;
 }
+p.about-pull {
+  font-size: clamp(1.4rem, 2.2vw, 1.75rem);
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--c-text);
+  margin: 1.75rem 0;
+  padding-left: 1.25rem;
+  border-left: 3px solid var(--c-accent);
+}
 strong { color: var(--c-text); font-weight: 600; }
 
 code, pre, kbd {
@@ -408,9 +417,6 @@ section { padding-block: var(--section-pad); }
 .hero-headline-private {
   display: block;
   white-space: nowrap;
-}
-.hero-headline-private {
-  color: var(--c-accent);
 }
 .hero p.lead {
   margin-bottom: 0.75rem;

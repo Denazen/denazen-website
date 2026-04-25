@@ -12,33 +12,67 @@ interface Props {
 const { lang, content: c } = Astro.props;
 const img = (p: string) => localizeAsset(p, lang);
 ---
+<!-- Hero -->
 <section>
   <div class="container-narrow">
     <h1>{c.hero.heading}</h1>
     <p class="lead mt-3">{c.hero.lead}</p>
+    <p class="about-pull">{c.hero.pullQuote}</p>
+    <p>{c.hero.body}</p>
   </div>
 </section>
 
+<!-- Why we built it -->
 <section class="section-tint">
   <div class="container-narrow legal-content">
-    <h2>{c.problem.heading}</h2>
-    {c.problem.paragraphs.map((p) => <p set:html={p} />)}
+    <h2>{c.whyBuilt.heading}</h2>
+    {c.whyBuilt.paragraphs.map((p) => <p>{p}</p>)}
+  </div>
+</section>
 
-    <h2>{c.whyDenazen.heading}</h2>
-    <p>{c.whyDenazen.intro}</p>
+<!-- What makes us different -->
+<section>
+  <div class="container-narrow legal-content">
+    <h2>{c.whatMakesDifferent.heading}</h2>
+    <p>{c.whatMakesDifferent.intro}</p>
     <ul>
-      {c.whyDenazen.list.map((item) => (
-        <li><strong>{item.label}</strong>{item.body}</li>
-      ))}
+      {c.whatMakesDifferent.list.map((item) => <li>{item}</li>)}
     </ul>
-    <p>{c.whyDenazen.trailing}</p>
+    {c.whatMakesDifferent.trailingParagraphs.map((p) => <p>{p}</p>)}
+  </div>
+</section>
 
-    <h2>{c.whyBuiltThisWay.heading}</h2>
-    {c.whyBuiltThisWay.paragraphs.map((p) => <p>{p}</p>)}
+<!-- How we think about privacy -->
+<section class="section-tint">
+  <div class="container-narrow legal-content">
+    <h2>{c.howPrivacy.heading}</h2>
+    {c.howPrivacy.paragraphs.map((p) => <p>{p}</p>)}
+  </div>
+</section>
 
+<!-- Built to stay aligned -->
+<section>
+  <div class="container-narrow legal-content">
+    <h2>{c.alignment.heading}</h2>
+    {c.alignment.paragraphs.map((p) => <p>{p}</p>)}
+  </div>
+</section>
+
+<!-- A different kind of company -->
+<section class="section-tint">
+  <div class="container-narrow legal-content">
     <h2>{c.pbc.heading}</h2>
     {c.pbc.paragraphs.map((p) => <p>{p}</p>)}
+    <ul>
+      {c.pbc.list.map((item) => <li>{item}</li>)}
+    </ul>
+    {c.pbc.trailingParagraphs.map((p) => <p>{p}</p>)}
+  </div>
+</section>
 
+<!-- Who we are -->
+<section>
+  <div class="container-narrow legal-content">
     <h2>{c.team.heading}</h2>
     <p>{c.team.intro}</p>
     {c.team.founders.map((f) => (
@@ -47,12 +81,18 @@ const img = (p: string) => localizeAsset(p, lang);
         <p><strong>{f.name}</strong>{f.bio}</p>
       </div>
     ))}
-
-    <h2>{c.whereWeAre.heading}</h2>
-    <p>{c.whereWeAre.body}</p>
   </div>
 </section>
 
+<!-- Where we are -->
+<section class="section-tint">
+  <div class="container-narrow legal-content">
+    <h2>{c.whereWeAre.heading}</h2>
+    {c.whereWeAre.paragraphs.map((p) => <p>{p}</p>)}
+  </div>
+</section>
+
+<!-- CTA -->
 <section class="section-dark">
   <div class="container">
     <div class="section-heading">
