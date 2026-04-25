@@ -23,12 +23,6 @@ export default {
       alt: "Denazen app on iPhone showing a private feed with a post tagged 'Shared with your Trusted Friends circle'.",
     },
   },
-  subhead: {
-    lines: [
-      'A social network built for real relationships—',
-      'with private spaces, real control, and no ads or tracking.',
-    ],
-  },
   whatDenazen: {
     heading: 'Social media used to feel different.',
     paragraphs: [
@@ -43,6 +37,8 @@ export default {
       'Post publicly when you want to reach beyond',
       'No ads. No tracking. No manipulation',
     ],
+    bskyNote:
+      'A layer on top of Bluesky—log in with your existing account, or create one in the app.',
     image: {
       src: '/images/screenshots/feed-public.webp',
       alt: "Denazen's public feed, with the Public and Private tabs visible at the top of the screen.",

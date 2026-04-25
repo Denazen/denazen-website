@@ -23,12 +23,6 @@ export default {
       alt: 'La app de Denazen en un iPhone mostrando un feed privado con una publicación etiquetada como "Compartida con tu círculo de amigos de confianza".',
     },
   },
-  subhead: {
-    lines: [
-      'Una red social hecha para relaciones reales—',
-      'con espacios privados, control real y sin anuncios ni rastreo.',
-    ],
-  },
   whatDenazen: {
     heading: 'Las redes sociales antes se sentían distintas.',
     paragraphs: [
@@ -43,6 +37,8 @@ export default {
       'Publica en público cuando quieras llegar más lejos',
       'Sin anuncios. Sin rastreo. Sin manipulación',
     ],
+    bskyNote:
+      'Una capa sobre Bluesky—inicia sesión con tu cuenta existente, o crea una en la app.',
     image: {
       src: '/images/screenshots/feed-public.webp',
       alt: 'El feed público de Denazen, con las pestañas Público y Privado visibles en la parte superior de la pantalla.',

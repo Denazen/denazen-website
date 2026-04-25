@@ -39,22 +39,8 @@ const img = (p: string) => localizeAsset(p, lang);
   </div>
 </section>
 
-<!-- Subhead -->
-<section class="section-tint home-subhead">
-  <div class="container-narrow">
-    <p class="home-subhead-text">
-      {c.subhead.lines.map((line, i) => (
-        <>
-          {line}
-          {i < c.subhead.lines.length - 1 && <br />}
-        </>
-      ))}
-    </p>
-  </div>
-</section>
-
 <!-- What Denazen Is -->
-<section class="home-prose">
+<section class="section-tint home-prose">
   <div class="container">
     <div class="home-grid">
       <div class="home-text">
@@ -64,6 +50,7 @@ const img = (p: string) => localizeAsset(p, lang);
         <ul class="home-list">
           {c.whatDenazen.list.map((item) => <li>{item}</li>)}
         </ul>
+        <p class="home-prose-closer">{c.whatDenazen.bskyNote}</p>
       </div>
       <div class="home-visual">
         <img src={img(c.whatDenazen.image.src)} alt={c.whatDenazen.image.alt} width="560" height="1111" />
@@ -73,7 +60,7 @@ const img = (p: string) => localizeAsset(p, lang);
 </section>
 
 <!-- Privacy -->
-<section class="section-tint home-prose">
+<section class="home-prose">
   <div class="container">
     <div class="home-grid reversed">
       <div class="home-text">
@@ -89,7 +76,7 @@ const img = (p: string) => localizeAsset(p, lang);
 </section>
 
 <!-- Freedom & Control -->
-<section class="home-prose">
+<section class="section-tint home-prose">
   <div class="container">
     <div class="home-grid">
       <div class="home-text">
