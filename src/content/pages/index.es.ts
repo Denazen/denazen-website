@@ -1,11 +1,11 @@
 export default {
   meta: {
-    title: 'Denazen — Lo mejor de lo que podrían ser las redes sociales',
+    title: 'Denazen — Redes sociales diseñadas para ti, no para ellos',
     description:
       'Una red social hecha para relaciones reales—con espacios privados, control real y sin anuncios ni rastreo.',
   },
   hero: {
-    heading: 'Lo mejor de lo que podrían ser las redes sociales.',
+    heading: 'Redes sociales diseñadas para ti, no para ellos.',
     rotator: {
       prefix: 'La conexión del ',
       words: ['Facebook', 'Instagram'],
