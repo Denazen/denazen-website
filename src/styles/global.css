@@ -432,7 +432,7 @@ section { padding-block: var(--section-pad); }
   position: relative;
 }
 .home-hero-visual img {
-  width: 54%;
+  width: 60%;
   max-width: none;
   height: auto;
   filter: drop-shadow(0 14px 28px rgba(26, 8, 54, 0.22));
@@ -440,13 +440,13 @@ section { padding-block: var(--section-pad); }
 .home-hero-phone-back {
   transform: rotate(-5deg);
   transform-origin: center bottom;
-  margin-right: -10%;
+  margin-right: -14%;
   z-index: 1;
 }
 .home-hero-phone-front {
   transform: rotate(5deg);
   transform-origin: center bottom;
-  margin-left: -10%;
+  margin-left: -14%;
   z-index: 2;
 }
 @media (max-width: 820px) {
@@ -461,6 +461,9 @@ section { padding-block: var(--section-pad); }
 }
 .home-hero-rotator-line {
   white-space: nowrap;
+}
+@media (max-width: 820px) {
+  .home-hero-rotator-line { white-space: normal; }
 }
 .word-rotator {
   display: inline-grid;
