@@ -1,11 +1,11 @@
 export default {
   meta: {
-    title: 'Denazen — Redes sociales diseñadas para ti, no para ellos',
+    title: 'Denazen — Redes sociales rediseñadas para ti',
     description:
       'Una red social hecha para relaciones reales—con espacios privados, control real y sin anuncios ni rastreo.',
   },
   hero: {
-    heading: 'Redes sociales diseñadas para ti, no para ellos.',
+    heading: 'Redes sociales rediseñadas para ti.',
     rotator: {
       prefix: 'La conexión del ',
       words: ['Facebook', 'Instagram'],
@@ -28,10 +28,10 @@ export default {
     },
   },
   whatDenazen: {
-    heading: 'Las redes sociales antes se sentían distintas.',
+    heading: 'Las redes sociales antes eran sobre conexión.',
     paragraphs: [
       'Eran sobre amigos. Familia. La vida real.',
-      'Luego se volvieron actuación. Algoritmos. Vigilancia.',
+      'Luego pasaron a ser sobre algoritmos que maximizan la interacción. Rastreo. Publicidad. Y los usuarios se convirtieron en el producto.',
     ],
     resolution:
       'Denazen las trae de vuelta—y las reconstruye para cómo debería funcionar internet hoy.',
