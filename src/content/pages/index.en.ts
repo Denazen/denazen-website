@@ -5,7 +5,7 @@ export default {
       'A social network built for real relationships—with private spaces, real control, and no ads or tracking.',
   },
   hero: {
-    heading: 'Social media redesigned for you',
+    heading: 'This is how social <em>should</em> work.',
     rotator: {
       prefix: 'The connection of early ',
       words: ['Facebook', 'Instagram'],

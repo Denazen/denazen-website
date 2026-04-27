@@ -17,7 +17,7 @@ const img = (p: string) => localizeAsset(p, lang);
   <div class="container">
     <div class="home-grid">
       <div class="home-text">
-        <h1>{c.hero.heading}</h1>
+        <h1 set:html={c.hero.heading}></h1>
         <p class="home-hero-lines">
           <span class="home-hero-rotator-line">
             {c.hero.rotator.prefix}<span class="word-rotator">
