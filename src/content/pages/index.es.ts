@@ -5,7 +5,7 @@ export default {
       'Una red social hecha para relaciones reales—con espacios privados, control real y sin anuncios ni rastreo.',
   },
   hero: {
-    heading: 'Redes sociales rediseñadas para ti.',
+    heading: 'Así es como las redes sociales <em>deberían</em> funcionar.',
     rotator: {
       prefix: 'La conexión del ',
       words: ['Facebook', 'Instagram'],
