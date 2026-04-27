@@ -28,10 +28,9 @@ export default {
     },
   },
   whatDenazen: {
-    heading: 'Social media used to feel different.',
+    heading: 'Social media used to be about connection.',
     paragraphs: [
-      'It was about friends. Family. Real life.',
-      'Then it became performance. Algorithms. Surveillance.',
+      'Performance. Surveillance. And the users became the product.',
     ],
     resolution:
       'Denazen brings it back—and rebuilds it for how the internet should work now.',
