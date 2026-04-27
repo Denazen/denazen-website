@@ -31,7 +31,7 @@ export default {
     heading: 'Social media used to be about connection.',
     paragraphs: [
       'It was about friends. Family. Real life.',
-      'Then it became about performance. Surveillance. Advertising. And the users became the product.',
+      'Then it became about engagement-maximizing algorithms. Tracking. Advertising. And the users became the product.',
     ],
     resolution:
       'Denazen brings it back—and rebuilds it for how the internet should work now.',
