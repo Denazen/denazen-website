@@ -31,15 +31,15 @@ export default {
     heading: 'Social media used to be about connection.',
     paragraphs: [
       'It was about friends. Family. Real life.',
-      'Then it became about engagement-maximizing algorithms. Tracking. Advertising. And the users became the product.',
+      'Then the users became the product, through tracking, advertising, and algorithms maximizing engagement.',
     ],
     resolution:
-      'Penrose brings it back—and rebuilds it for how the internet should work now.',
+      'Penrose brings back real connection and adds in privacy and user control.',
     list: [
-      'Connect with the people you actually care about',
+      'Connect closely with the people you care about',
       'Share privately with trusted circles',
-      'Post publicly when you want to reach beyond',
-      'No ads. No tracking. No manipulation',
+      'Post or explore public when you want to reach beyond',
+      'No ads. No tracking. No manipulation.',
     ],
     image: {
       src: '/images/screenshots/whats-denazen.webp',
@@ -47,10 +47,10 @@ export default {
     },
   },
   privacy: {
-    heading: 'Private means private.',
+    heading: 'Reclaim your right to privacy.',
     paragraphs: [
-      'Your private posts are end-to-end encrypted—so only the people you choose can see them.',
-      'Not us. Not advertisers. Not anyone else.',
+      'With Penrose, your private posts are end-to-end encrypted so that only the people you choose can see them.',
+      'Not us. Not advertisers. Not AI. Not <em>anyone</em> else.',
     ],
     closer: 'Because real connection requires trust.',
     image: {
@@ -59,20 +59,21 @@ export default {
     },
   },
   freedom: {
-    heading: 'You decide what your social experience looks like.',
+    heading: 'You control what your social experience looks like.',
     intro:
-      'Penrose is built on the idea that you should control what you see, how you engage, and where your data lives.',
+      'Penrose is layered on the Bluesky network, plugging you into a network of 40+ million people. It is built on the idea that you should control what you see and how you engage.',
     list: [
       'No algorithm forcing content on you',
-      'No engagement traps or infinite scroll manipulation',
+      'No engagement traps or behavioral tracking',
       'No platform lock-in',
+      'And no ads'
     ],
     closing: [
       'You choose what matters. You choose how to experience it.',
       "And because your identity and data are portable, you're never stuck in one place.",
     ],
     bskyNote:
-      'A layer on top of Bluesky—log in with your existing account, or create one in the app.',
+      'Current Bluesky users can log in with their existing account, or you can create one in the app.',
     image: {
       src: '/images/screenshots/circles.webp',
       alt: "Penrose's circles management screen showing user-defined circles like Closest Friends, Family, and Book Club.",
@@ -81,9 +82,9 @@ export default {
   values: {
     heading: 'Built differently—on purpose.',
     paragraphs: [
-      "Penrose is a Public Benefit Corporation. That means our mission isn't just a promise—it's part of our legal structure.",
-      "We're accountable not just to growth, but to people and the world we're building in.",
-      "Penrose is free to use. We don't rely on ads, tracking, or attention extraction.",
+      "Penrose is a Public Benefit Corporation. That means our mission isn't just a promise. It's part of our legal structure.",
+      "We're accountable to the people using the platform and the world we're building in. From day one we will be contributing a portion of profits to causes including conservation and environmental protection, civil & human rights, and privacy.",
+      "Penrose is free to use for all, with premium features to enable us to stay independent on not rely on ads, tracking, or attention extraction.",
       "We're building a model based on reciprocity—designed to give back to the people who make this network what it is.",
     ],
   },

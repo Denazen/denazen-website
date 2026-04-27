@@ -31,15 +31,15 @@ export default {
     heading: 'Las redes sociales antes eran sobre conexión.',
     paragraphs: [
       'Eran sobre amigos. Familia. La vida real.',
-      'Luego pasaron a ser sobre algoritmos que maximizan la interacción. Rastreo. Publicidad. Y los usuarios se convirtieron en el producto.',
+      'Luego los usuarios se convirtieron en el producto, a través del rastreo, la publicidad y algoritmos que maximizan la interacción.',
     ],
     resolution:
-      'Penrose las trae de vuelta—y las reconstruye para cómo debería funcionar internet hoy.',
+      'Penrose recupera la conexión real y le suma privacidad y control para el usuario.',
     list: [
-      'Conecta con las personas que de verdad te importan',
+      'Conecta de cerca con las personas que te importan',
       'Comparte en privado con círculos de confianza',
-      'Publica en público cuando quieras llegar más lejos',
-      'Sin anuncios. Sin rastreo. Sin manipulación',
+      'Publica o explora en público cuando quieras llegar más lejos',
+      'Sin anuncios. Sin rastreo. Sin manipulación.',
     ],
     image: {
       src: '/images/screenshots/whats-denazen.webp',
@@ -47,10 +47,10 @@ export default {
     },
   },
   privacy: {
-    heading: 'Privado significa privado.',
+    heading: 'Recupera tu derecho a la privacidad.',
     paragraphs: [
-      'Tus publicaciones privadas están cifradas de extremo a extremo—así que solo las personas que elijas pueden verlas.',
-      'Ni nosotros. Ni los anunciantes. Ni nadie más.',
+      'Con Penrose, tus publicaciones privadas se cifran de extremo a extremo para que solo las personas que elijas puedan verlas.',
+      'Ni nosotros. Ni los anunciantes. Ni la IA. <em>Nadie</em> más.',
     ],
     closer: 'Porque la conexión real requiere confianza.',
     image: {
@@ -59,20 +59,21 @@ export default {
     },
   },
   freedom: {
-    heading: 'Tú decides cómo se ve tu experiencia social.',
+    heading: 'Tú controlas cómo se ve tu experiencia social.',
     intro:
-      'Penrose está construido sobre la idea de que tú deberías controlar lo que ves, cómo participas y dónde viven tus datos.',
+      'Penrose se construye sobre la red de Bluesky, conectándote a una red de más de 40 millones de personas. Está construido sobre la idea de que tú deberías controlar lo que ves y cómo participas.',
     list: [
       'Sin un algoritmo forzando contenido sobre ti',
-      'Sin trampas de enganche ni manipulación de scroll infinito',
+      'Sin trampas de enganche ni rastreo de comportamiento',
       'Sin atrapamiento en una plataforma',
+      'Y sin anuncios',
     ],
     closing: [
       'Tú eliges lo que importa. Tú eliges cómo experimentarlo.',
       'Y como tu identidad y tus datos son portátiles, nunca te quedas atrapado en un solo lugar.',
     ],
     bskyNote:
-      'Una capa sobre Bluesky—inicia sesión con tu cuenta existente, o crea una en la app.',
+      'Los usuarios actuales de Bluesky pueden iniciar sesión con su cuenta existente, o puedes crear una nueva en la app.',
     image: {
       src: '/images/screenshots/circles.webp',
       alt: 'La pantalla de gestión de círculos de Penrose mostrando círculos definidos por el usuario como Amigos Más Cercanos, Familia y Club de Lectura.',
@@ -81,9 +82,9 @@ export default {
   values: {
     heading: 'Construido diferente—a propósito.',
     paragraphs: [
-      'Penrose es una Public Benefit Corporation. Eso significa que nuestra misión no es solo una promesa—es parte de nuestra estructura legal.',
-      'Somos responsables no solo del crecimiento, sino de las personas y del mundo en el que estamos construyendo.',
-      'Penrose es gratis. No dependemos de anuncios, rastreo ni extracción de atención.',
+      'Penrose es una Public Benefit Corporation. Eso significa que nuestra misión no es solo una promesa. Es parte de nuestra estructura legal.',
+      'Somos responsables ante las personas que usan la plataforma y el mundo en el que estamos construyendo. Desde el primer día contribuiremos con una parte de las ganancias a causas que incluyen la conservación y la protección del medio ambiente, los derechos civiles y humanos, y la privacidad.',
+      'Penrose es gratis para todos, con funciones premium que nos permiten mantenernos independientes y no depender de anuncios, rastreo ni extracción de atención.',
       'Estamos construyendo un modelo basado en la reciprocidad—diseñado para devolver a las personas que hacen esta red lo que es.',
     ],
   },
