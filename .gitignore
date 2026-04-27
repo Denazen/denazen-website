@@ -31,5 +31,5 @@ pnpm-debug.log*
 .wrangler/
 
 # Uncompressed source mockups (kept local; committed versions in public/images/screenshots/)
-apple-iphone-*-mockup/
+apple-iphone-*-mockup*/
 product_images/
