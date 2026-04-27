@@ -15,7 +15,7 @@ export default {
       'The privacy of Signal.',
       'The freedom of Bluesky.',
     ],
-    tagline: ['All in one one place.', 'The impossible triangle. Solved.'],
+    tagline: ['All in one place.', 'The impossible triangle. Solved.'],
     waitlistButton: 'Request invite',
     waitlistNote: "Invite-only Beta.",
     imagePublic: {
