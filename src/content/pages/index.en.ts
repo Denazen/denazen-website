@@ -30,6 +30,7 @@ export default {
   whatDenazen: {
     heading: 'Social media used to be about connection.',
     paragraphs: [
+      'It was about friends. Family. Real life.',
       'Performance. Surveillance. And the users became the product.',
     ],
     resolution:
