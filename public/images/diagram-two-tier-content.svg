@@ -1,17 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 460" role="img" aria-label="Two-tier content encryption: the Circle key (AES-256, shared with circle members) wraps a per-post Content key (AES-256, fresh random), which in turn encrypts each attached .zen file — the post's text and every image.">
   <defs>
     <style>
-      .tier-outer { fill: #ffffff; stroke: #6B2C91; stroke-width: 2; }
-      .tier-inner { fill: #faf7fd; stroke: #6B2C91; stroke-width: 2; }
-      .zen { fill: #f0d9ff; stroke: #6B2C91; stroke-width: 1.5; }
-      .arrow { stroke: #6B2C91; stroke-width: 2; fill: none; }
+      .tier-outer { fill: #ffffff; stroke: #1F8FE0; stroke-width: 2; }
+      .tier-inner { fill: #f4f9fd; stroke: #1F8FE0; stroke-width: 2; }
+      .zen { fill: #ddeefa; stroke: #1F8FE0; stroke-width: 1.5; }
+      .arrow { stroke: #1F8FE0; stroke-width: 2; fill: none; }
       .lbl-head { font: 600 15px/1.2 Inter, sans-serif; fill: #111827; }
       .lbl-sub { font: 400 12px/1.3 Inter, sans-serif; fill: #4b5563; }
-      .lbl-op { font: 400 11px/1.2 'JetBrains Mono', ui-monospace, monospace; fill: #6B2C91; }
+      .lbl-op { font: 400 11px/1.2 'JetBrains Mono', ui-monospace, monospace; fill: #1F8FE0; }
       .lbl-file { font: 400 12px/1.2 'JetBrains Mono', ui-monospace, monospace; fill: #111827; }
     </style>
     <marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#6B2C91"/>
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1F8FE0"/>
     </marker>
   </defs>
 
