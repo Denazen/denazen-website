@@ -15,7 +15,7 @@ export default {
       'The privacy of Signal.',
       'The freedom of Bluesky.',
     ],
-    tagline: ['Public when you want.', 'Private when it matters.'],
+    tagline: ['Social, without the trade offs'],
     waitlistButton: 'Request invite',
     waitlistNote: "Invite-only Beta.",
     imagePublic: {
