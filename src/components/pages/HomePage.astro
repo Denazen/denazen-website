@@ -60,7 +60,7 @@ const img = (p: string) => localizeAsset(p, lang);
     <div class="home-grid">
       <div class="home-text">
         <h2>{c.whatPenrose.heading}</h2>
-        {c.whatPenrose.paragraphs.map((p) => <p>{p}</p>)}
+        {c.whatPenrose.paragraphs.map((p) => <p set:html={p} />)}
         <p class="home-prose-resolution">{c.whatPenrose.resolution}</p>
         <ul class="home-list">
           {c.whatPenrose.list.map((item) => <li>{item}</li>)}
@@ -79,7 +79,7 @@ const img = (p: string) => localizeAsset(p, lang);
     <div class="home-grid reversed">
       <div class="home-text">
         <h2>{c.privacy.heading}</h2>
-        {c.privacy.paragraphs.map((p) => <p>{p}</p>)}
+        {c.privacy.paragraphs.map((p) => <p set:html={p} />)}
         <p class="home-prose-closer">{c.privacy.closer}</p>
       </div>
       <div class="home-visual">

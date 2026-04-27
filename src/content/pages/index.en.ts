@@ -38,7 +38,7 @@ export default {
     list: [
       'Connect closely with the people you care about',
       'Share privately with trusted circles',
-      'Post or explore public when you want to reach beyond',
+      'Post or explore public content when you want to reach beyond',
       'No ads. No tracking. No manipulation.',
     ],
     image: {
@@ -50,7 +50,7 @@ export default {
     heading: 'Reclaim your right to privacy.',
     paragraphs: [
       'With Penrose, your private posts are end-to-end encrypted so that only the people you choose can see them.',
-      'Not us. Not advertisers. Not AI. Not <em>anyone</em> else.',
+      'Not advertisers. Not AI. Not governments. <em>No one else.</em> Not even us.',
     ],
     closer: 'Because real connection requires trust.',
     image: {

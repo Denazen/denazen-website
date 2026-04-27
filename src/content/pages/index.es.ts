@@ -38,7 +38,7 @@ export default {
     list: [
       'Conecta de cerca con las personas que te importan',
       'Comparte en privado con círculos de confianza',
-      'Publica o explora en público cuando quieras llegar más lejos',
+      'Publica o explora contenido público cuando quieras llegar más lejos',
       'Sin anuncios. Sin rastreo. Sin manipulación.',
     ],
     image: {
@@ -50,7 +50,7 @@ export default {
     heading: 'Recupera tu derecho a la privacidad.',
     paragraphs: [
       'Con Penrose, tus publicaciones privadas se cifran de extremo a extremo para que solo las personas que elijas puedan verlas.',
-      'Ni nosotros. Ni los anunciantes. Ni la IA. <em>Nadie</em> más.',
+      'Ni los anunciantes. Ni la IA. Ni los gobiernos. <em>Nadie más.</em> Ni siquiera nosotros.',
     ],
     closer: 'Porque la conexión real requiere confianza.',
     image: {
