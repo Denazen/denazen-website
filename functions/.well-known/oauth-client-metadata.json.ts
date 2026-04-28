@@ -1,41 +1,24 @@
 // Cloudflare Pages Function — serves the ATProto OAuth client metadata
 // JSON, varying its contents by the requesting Host so each app build
-// variant can have its own client_id and redirect URIs.
+// variant has its own client_id.
 //
-// Why this exists: ATProto OAuth requires the redirect URI scheme to be
-// the reverse-DNS of the client_id host. With three build variants
-// (dev / beta / production) hosting metadata at three subdomains, each
-// gets its own scheme and they can coexist on a single device.
-// See ADR 0002 for the original tactical-workaround context.
-//
-// Each variant now advertises TWO redirect URIs (HTTPS first, custom
-// scheme second). `@atproto/oauth-client-expo` picks `redirect_uris[0]`
-// so it'll prefer the HTTPS one — which the OS dispatches directly to
-// the app via Universal Links / App Links, skipping the browser entirely
-// and removing the Android-default-browser hang failure mode that
-// drove this migration. The custom-scheme entry stays as fallback for
-// any binary built against the older metadata; once HTTPS dispatch has
-// soaked in production for ≥1 release cycle, drop it (Phase 4).
-// See `denazen` repo: docs/plan-app-links-redirect.md.
+// The redirect_uri returned for each variant is an HTTPS URL on the
+// matching subdomain, dispatched to the app via Universal Links /
+// App Links. See `denazen` repo: docs/plan-app-links-redirect.md and
+// ADR 0006 for the per-variant subdomain pattern.
 //
 // Routing:
 //   GET https://dev.denazen.com/.well-known/oauth-client-metadata.json
 //     → client_id: https://dev.denazen.com/.well-known/oauth-client-metadata.json
-//     → redirect_uris:
-//         [ "https://dev.denazen.com/oauth-callback",
-//           "com.denazen.dev:/oauth-callback" ]
+//     → redirect_uri: https://dev.denazen.com/oauth-callback
 //
 //   GET https://beta.denazen.com/.well-known/oauth-client-metadata.json
 //     → client_id: https://beta.denazen.com/.well-known/oauth-client-metadata.json
-//     → redirect_uris:
-//         [ "https://beta.denazen.com/oauth-callback",
-//           "com.denazen.beta:/oauth-callback" ]
+//     → redirect_uri: https://beta.denazen.com/oauth-callback
 //
 //   GET https://denazen.com/.well-known/oauth-client-metadata.json
 //     → client_id: https://denazen.com/.well-known/oauth-client-metadata.json
-//     → redirect_uris:
-//         [ "https://denazen.com/oauth-callback",
-//           "com.denazen:/oauth-callback" ]
+//     → redirect_uri: https://denazen.com/oauth-callback
 //
 //   Any other host (preview *.pages.dev, localhost, www. variants):
 //     → falls back to production metadata. Not used by any real client;
@@ -46,15 +29,14 @@
 // Cloudflare Pages — if any of those exist, this function never runs.
 
 interface VariantConfig {
-  scheme: string;        // reverse-DNS of the host
   client_name: string;
   client_uri_host: string; // host used for client_id + client_uri
 }
 
 const VARIANTS: Record<string, VariantConfig> = {
-  'dev.denazen.com':  { scheme: 'com.denazen.dev',  client_name: 'Denazen Dev',  client_uri_host: 'dev.denazen.com'  },
-  'beta.denazen.com': { scheme: 'com.denazen.beta', client_name: 'Denazen Beta', client_uri_host: 'beta.denazen.com' },
-  'denazen.com':      { scheme: 'com.denazen',      client_name: 'Denazen',      client_uri_host: 'denazen.com'      },
+  'dev.denazen.com':  { client_name: 'Denazen Dev',  client_uri_host: 'dev.denazen.com'  },
+  'beta.denazen.com': { client_name: 'Denazen Beta', client_uri_host: 'beta.denazen.com' },
+  'denazen.com':      { client_name: 'Denazen',      client_uri_host: 'denazen.com'      },
 };
 
 const DEFAULT_VARIANT: VariantConfig = VARIANTS['denazen.com'];
@@ -74,10 +56,7 @@ export const onRequestGet: PagesFunction = ({ request }) => {
     policy_uri: 'https://denazen.com/privacy/',
     tos_uri: 'https://denazen.com/terms/',
     application_type: 'native',
-    redirect_uris: [
-      `https://${clientUriHost}/oauth-callback`,
-      `${variant.scheme}:/oauth-callback`,
-    ],
+    redirect_uris: [`https://${clientUriHost}/oauth-callback`],
     grant_types: ['authorization_code', 'refresh_token'],
     response_types: ['code'],
     scope: 'atproto transition:generic transition:chat.bsky',
