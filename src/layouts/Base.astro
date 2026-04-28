@@ -9,14 +9,19 @@ import { localizeAsset } from '../i18n/assets';
 interface Props {
   title: string;
   description?: string;
+  ogTitle?: string;
   ogImage?: string;
   pathname?: string;
   lang?: Lang;
 }
 
+const SHARE_TAGLINE_EN = 'Social media, without compromise.';
+const SHARE_TAGLINE_ES = 'Las redes sociales, sin concesiones.';
+
 const {
   title,
-  description = 'Public when you want. Private when it matters. A privacy-first social network built on Bluesky, with end-to-end encrypted circles.',
+  description = 'A privacy-first social network. Public when you choose, private when it matters.',
+  ogTitle,
   ogImage = '/images/og-default.png',
   pathname,
   lang = defaultLang,
@@ -30,6 +35,9 @@ const langlessPath = stripLangFromPath(currentPath);
 const alternates = getAlternateUrls(currentPath, site);
 const xDefault = alternates.find((a) => a.lang === defaultLang)?.href;
 const ogImageResolved = localizeAsset(ogImage, lang);
+const ogImageUrl = new URL(ogImageResolved, site).href;
+const shareTagline = lang === 'es' ? SHARE_TAGLINE_ES : SHARE_TAGLINE_EN;
+const ogTitleResolved = ogTitle ?? `Penrose — ${shareTagline}`;
 ---
 <!doctype html>
 <html lang={lang}>
@@ -48,17 +56,22 @@ const ogImageResolved = localizeAsset(ogImage, lang);
     <link rel="apple-touch-icon" href="/favicon/icon.png?v=2" />
     <meta name="theme-color" content="#2884E0" />
 
-    <meta property="og:title" content={title} />
+    <meta property="og:site_name" content="Penrose" />
+    <meta property="og:title" content={ogTitleResolved} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={ogImageResolved} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`Penrose — ${shareTagline}`} />
     <meta property="og:locale" content={lang === 'es' ? 'es_ES' : 'en_US'} />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
+    <meta name="twitter:title" content={ogTitleResolved} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImageResolved} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    <meta name="twitter:image:alt" content={`Penrose — ${shareTagline}`} />
 
     <link rel="preload" href="/fonts/inter/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/inter/Inter-ExtraBold.woff2" as="font" type="font/woff2" crossorigin />
