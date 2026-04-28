@@ -52,7 +52,7 @@ export const onRequestGet: PagesFunction = ({ request }) => {
     client_uri: `https://${clientUriHost}`,
     // logo / policy / tos all reference the production host — assets and
     // legal copy live on prod regardless of which variant is requesting.
-    logo_uri: 'https://denazen.com/images/brand/fox-64.png',
+    logo_uri: 'https://denazen.com/images/brand/penrose-64.png',
     policy_uri: 'https://denazen.com/privacy/',
     tos_uri: 'https://denazen.com/terms/',
     application_type: 'native',
