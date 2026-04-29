@@ -59,12 +59,11 @@ export default {
   freedom: {
     heading: 'The freedom of an open network.',
     intro:
-      "Penrose runs on the AT Protocol, the open social network behind Bluesky and 40+ million people. A whole world of public conversation is right there. Dive into any topic you care about, follow voices outside your circle, and discover what's actually happening, not what an algorithm picked for you.",
+      "Penrose runs on the AT Protocol, the open social network behind Bluesky and 40+ million people. Dive into any topic you care about and discover what's actually happening, not what an algorithm picked for you.",
     list: [
       'Explore public posts on any topic: politics, art, science, your niche hobby',
       'Bring your existing Bluesky handle, or start fresh in the app',
       'Take your followers, posts, and identity to any AT Protocol app',
-      'Choose your own algorithms, or skip them entirely',
     ],
     closing: [
       'You choose what matters. You choose how to experience it.',

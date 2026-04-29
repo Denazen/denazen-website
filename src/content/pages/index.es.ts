@@ -59,12 +59,11 @@ export default {
   freedom: {
     heading: 'La libertad de una red abierta.',
     intro:
-      'Penrose corre sobre el AT Protocol, la red social abierta detrás de Bluesky y más de 40 millones de personas. Tienes un mundo entero de conversación pública al alcance. Sumérgete en cualquier tema que te importe, sigue voces fuera de tu círculo y descubre lo que realmente está pasando, no lo que un algoritmo decidió mostrarte.',
+      'Penrose corre sobre el AT Protocol, la red social abierta detrás de Bluesky y más de 40 millones de personas. Sumérgete en cualquier tema que te importe y descubre lo que realmente está pasando, no lo que un algoritmo decidió mostrarte.',
     list: [
       'Explora publicaciones públicas sobre cualquier tema: política, arte, ciencia, tu hobby de nicho',
       'Trae tu handle existente de Bluesky, o empieza desde cero en la app',
       'Lleva tus seguidores, publicaciones e identidad a cualquier app del AT Protocol',
-      'Elige tus propios algoritmos, o sáltatelos por completo',
     ],
     closing: [
       'Tú eliges lo que importa. Tú eliges cómo experimentarlo.',
