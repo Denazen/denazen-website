@@ -15,6 +15,7 @@ export default {
     linesAfter: [
       'Freedom of Bluesky.',
     ],
+    tagline: ['The impossible triangle. Solved.'],
     waitlistButton: 'Request invite',
     waitlistNote: 'Invite-only beta launching soon. Help shape the future of social.',
     imagePublic: {

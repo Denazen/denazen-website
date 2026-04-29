@@ -15,6 +15,7 @@ export default {
     linesAfter: [
       'Libertad de Bluesky.',
     ],
+    tagline: ['El triángulo imposible. Resuelto.'],
     waitlistButton: 'Solicitar invitación',
     waitlistNote: 'Beta solo por invitación próximamente. Ayuda a dar forma al futuro de las redes sociales.',
     imagePublic: {

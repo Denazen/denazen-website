@@ -39,6 +39,14 @@ const img = (p: string) => localizeAsset(p, lang);
             </>
           ))}
         </p>
+        <p class="home-hero-tagline">
+          {c.hero.tagline.map((line, i) => (
+            <>
+              {line}
+              {i < c.hero.tagline.length - 1 && <br />}
+            </>
+          ))}
+        </p>
         <div class="home-hero-cta">
           <WaitlistForm lang={lang} id="waitlist" buttonLabel={c.hero.waitlistButton} note={c.hero.waitlistNote} />
         </div>
