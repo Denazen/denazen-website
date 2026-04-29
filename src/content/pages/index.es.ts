@@ -28,18 +28,17 @@ export default {
     },
   },
   whatPenrose: {
-    heading: 'Las redes sociales antes eran sobre conexión.',
+    heading: '¿Te acuerdas cuando lo social era social?',
     paragraphs: [
-      'Eran sobre amigos. Familia. La vida real.',
-      'Luego los usuarios se convirtieron en el producto, a través del rastreo, la publicidad y algoritmos que maximizan la interacción.',
+      'Las redes sociales empezaron como una forma de mantenerte al día con las personas de tu vida—las personas a las que de verdad llamarías. Tu hermana. Tu compañera de cuarto de la universidad. Tus amigos más cercanos.',
+      'En algún momento, el feed dejó de ser sobre ellos. Se convirtió en extraños, performers y anuncios—lo que un algoritmo decidiera para mantenerte desplazándote.',
     ],
-    resolution:
-      'Penrose recupera la conexión real y le suma privacidad y control para el usuario.',
+    resolution: 'Penrose vuelve a poner a las personas en el centro.',
     list: [
-      'Conecta de cerca con las personas que te importan',
-      'Comparte en privado con círculos de confianza',
-      'Publica o explora contenido público cuando quieras llegar más lejos',
-      'Sin anuncios. Sin rastreo. Sin manipulación.',
+      'Crea círculos para las personas que importan—amigos cercanos, familia, tu club de lectura',
+      'Un feed cronológico de las personas que realmente elegiste seguir',
+      'Comparte momentos pensados para unos pocos, no publicaciones diseñadas para alcanzar a millones',
+      'Menos performance. Más presencia.',
     ],
     image: {
       src: '/images/screenshots/whats-denazen.webp',
@@ -47,30 +46,30 @@ export default {
     },
   },
   privacy: {
-    heading: 'Recupera tu derecho a la privacidad.',
+    heading: 'Privado significa privado.',
     paragraphs: [
-      'Con Penrose, tus publicaciones privadas se cifran de extremo a extremo para que solo las personas que elijas puedan verlas.',
-      'Ni los anunciantes. Ni la IA. Ni los gobiernos. <em>Nadie más.</em> Ni siquiera nosotros.',
+      'Las publicaciones que compartes con un círculo se cifran de extremo a extremo antes de salir de tu dispositivo. Solo las personas de ese círculo pueden leerlas.',
+      'Ni los anunciantes. Ni la IA. Ni los gobiernos. <em>Nadie más.</em> Ni siquiera nosotros—las llaves viven en tus dispositivos y no tenemos forma de descifrar tu contenido.',
     ],
-    closer: 'Porque la conexión real requiere confianza.',
+    closer: 'Criptografía, no políticas. La matemática es la promesa.',
     image: {
       src: '/images/screenshots/private-network.webp',
       alt: 'La pantalla de Red Privada de Penrose en iPhone, explicando el cifrado de extremo a extremo.',
     },
   },
   freedom: {
-    heading: 'Tú controlas cómo se ve tu experiencia social.',
+    heading: 'Tu cuenta, tu red, tus reglas.',
     intro:
-      'Penrose se construye sobre la red de Bluesky, conectándote a una red de más de 40 millones de personas. Está construido sobre la idea de que tú deberías controlar lo que ves y cómo participas.',
+      'Penrose está construido sobre el AT Protocol—la red social abierta detrás de Bluesky y más de 40 millones de personas. Tu identidad, tus seguidores y tus publicaciones no le pertenecen a una plataforma. Te pertenecen a ti.',
     list: [
-      'Sin un algoritmo forzando contenido sobre ti',
-      'Sin trampas de enganche ni rastreo de comportamiento',
-      'Sin atrapamiento en una plataforma',
-      'Y sin anuncios',
+      'Trae tu handle existente de Bluesky, o empieza desde cero en la app',
+      'Lleva tus seguidores, publicaciones e identidad a cualquier app del AT Protocol',
+      'Elige tus propios algoritmos—o sáltatelos por completo',
+      'Una red abierta que puedes dejar en cualquier momento, con todo intacto',
     ],
     closing: [
       'Tú eliges lo que importa. Tú eliges cómo experimentarlo.',
-      'Y como tu identidad y tus datos son portátiles, nunca te quedas atrapado en un solo lugar.',
+      'Si algún día dejamos de ser el lugar adecuado para ti, tu red se va contigo.',
     ],
     bskyNote:
       'Los usuarios actuales de Bluesky pueden iniciar sesión con su cuenta existente, o puedes crear una nueva en la app.',

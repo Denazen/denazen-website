@@ -28,18 +28,17 @@ export default {
     },
   },
   whatPenrose: {
-    heading: 'Social media used to be about connection.',
+    heading: 'Remember when social was social?',
     paragraphs: [
-      'It was about friends. Family. Real life.',
-      'Then the users became the product, through tracking, advertising, and algorithms maximizing engagement.',
+      "Social media started as a way to keep up with the people in your life—the people you'd actually call. Your sister. Your roommate from college. Your closest friends.",
+      'Somewhere along the way, the feed stopped being them. It became strangers, performers, and ads—whatever an algorithm decided would keep you scrolling.',
     ],
-    resolution:
-      'Penrose brings back real connection and adds in privacy and user control.',
+    resolution: 'Penrose puts the people back at the center.',
     list: [
-      'Connect closely with the people you care about',
-      'Share privately with trusted circles',
-      'Post or explore public content when you want to reach beyond',
-      'No ads. No tracking. No manipulation.',
+      'Build circles for the people who matter—close friends, family, your book club',
+      'A chronological feed of the people you actually chose to follow',
+      'Share moments meant for a few, not posts engineered for reach',
+      'Less performance. More presence.',
     ],
     image: {
       src: '/images/screenshots/whats-denazen.webp',
@@ -47,30 +46,30 @@ export default {
     },
   },
   privacy: {
-    heading: 'Reclaim your right to privacy.',
+    heading: 'Private means private.',
     paragraphs: [
-      'With Penrose, your private posts are end-to-end encrypted so that only the people you choose can see them.',
-      'Not advertisers. Not AI. Not governments. <em>No one else.</em> Not even us.',
+      'Posts you share with a circle are end-to-end encrypted before they leave your device. Only the people in that circle can read them.',
+      'Not advertisers. Not AI. Not governments. <em>No one else.</em> Not even us—the keys live on your devices, and we have no way to decrypt your content.',
     ],
-    closer: 'Because real connection requires trust.',
+    closer: 'Cryptography, not policy. The math is the promise.',
     image: {
       src: '/images/screenshots/private-network.webp',
       alt: "Penrose's Private Network screen on iPhone, explaining end-to-end encryption.",
     },
   },
   freedom: {
-    heading: 'You control what your social experience looks like.',
+    heading: 'Your account, your network, your rules.',
     intro:
-      'Penrose is layered on the Bluesky network, plugging you into a network of 40+ million people. It is built on the idea that you should control what you see and how you engage.',
+      "Penrose is built on the AT Protocol—the open social network behind Bluesky and 40+ million people. Your identity, your followers, and your posts don't belong to a platform. They belong to you.",
     list: [
-      'No algorithm forcing content on you',
-      'No engagement traps or behavioral tracking',
-      'No platform lock-in',
-      'And no ads'
+      'Bring your existing Bluesky handle, or start fresh in the app',
+      'Take your followers, posts, and identity to any AT Protocol app',
+      'Choose your own algorithms—or skip them entirely',
+      'An open network you can leave at any time, with everything intact',
     ],
     closing: [
       'You choose what matters. You choose how to experience it.',
-      "And because your identity and data are portable, you're never stuck in one place.",
+      'If we ever stop being the right home for you, your network comes with you.',
     ],
     bskyNote:
       'Current Bluesky users can log in with their existing account, or you can create one in the app.',
