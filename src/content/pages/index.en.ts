@@ -47,7 +47,7 @@ export default {
   privacy: {
     heading: 'Private means private.',
     paragraphs: [
-      'Posts you share with a circle are encrypted on your device before they leave it. Only the people you trust with that circle hold the keys to decrypt them.',
+      'Posts you share with a circle are encrypted on your device before they leave it. Only the people you trust hold the keys to decrypt them.',
       'Not advertisers. Not AI. Not governments. <em>No one else.</em> Not even us. We have no way to decrypt your content.',
     ],
     closer: 'Cryptography, not policy. The math is the promise.',
