@@ -48,7 +48,7 @@ export default {
   privacy: {
     heading: 'Private means private.',
     paragraphs: [
-      'Posts you share with a circle are end-to-end encrypted before they leave your device. Only the people in that circle can read them.',
+      'Posts you share with a circle are encrypted on your device before they leave it. Only the people you trust with that circle hold the keys to decrypt them.',
       'Not advertisers. Not AI. Not governments. <em>No one else.</em> Not even us—the keys live on your devices, and we have no way to decrypt your content.',
     ],
     closer: 'Cryptography, not policy. The math is the promise.',
@@ -58,14 +58,14 @@ export default {
     },
   },
   freedom: {
-    heading: 'Your account, your network, your rules.',
+    heading: 'The freedom of an open network.',
     intro:
-      "Penrose is built on the AT Protocol—the open social network behind Bluesky and 40+ million people. Your identity, your followers, and your posts don't belong to a platform. They belong to you.",
+      "Penrose runs on the AT Protocol—the open social network behind Bluesky and 40+ million people. A whole world of public conversation is right there: dive into any topic you care about, follow voices outside your circle, and discover what's actually happening—not what an algorithm decided to show you.",
     list: [
+      'Explore public posts on any topic—politics, art, science, your niche hobby',
       'Bring your existing Bluesky handle, or start fresh in the app',
       'Take your followers, posts, and identity to any AT Protocol app',
       'Choose your own algorithms—or skip them entirely',
-      'An open network you can leave at any time, with everything intact',
     ],
     closing: [
       'You choose what matters. You choose how to experience it.',

@@ -48,7 +48,7 @@ export default {
   privacy: {
     heading: 'Privado significa privado.',
     paragraphs: [
-      'Las publicaciones que compartes con un círculo se cifran de extremo a extremo antes de salir de tu dispositivo. Solo las personas de ese círculo pueden leerlas.',
+      'Las publicaciones que compartes con un círculo se cifran en tu dispositivo antes de salir de él. Solo las personas en las que confías dentro de ese círculo tienen las llaves para descifrarlas.',
       'Ni los anunciantes. Ni la IA. Ni los gobiernos. <em>Nadie más.</em> Ni siquiera nosotros—las llaves viven en tus dispositivos y no tenemos forma de descifrar tu contenido.',
     ],
     closer: 'Criptografía, no políticas. La matemática es la promesa.',
@@ -58,14 +58,14 @@ export default {
     },
   },
   freedom: {
-    heading: 'Tu cuenta, tu red, tus reglas.',
+    heading: 'La libertad de una red abierta.',
     intro:
-      'Penrose está construido sobre el AT Protocol—la red social abierta detrás de Bluesky y más de 40 millones de personas. Tu identidad, tus seguidores y tus publicaciones no le pertenecen a una plataforma. Te pertenecen a ti.',
+      'Penrose corre sobre el AT Protocol—la red social abierta detrás de Bluesky y más de 40 millones de personas. Tienes un mundo entero de conversación pública al alcance: sumérgete en cualquier tema que te importe, sigue voces fuera de tu círculo y descubre lo que realmente está pasando—no lo que un algoritmo decidió mostrarte.',
     list: [
+      'Explora publicaciones públicas sobre cualquier tema—política, arte, ciencia, tu hobby de nicho',
       'Trae tu handle existente de Bluesky, o empieza desde cero en la app',
       'Lleva tus seguidores, publicaciones e identidad a cualquier app del AT Protocol',
       'Elige tus propios algoritmos—o sáltatelos por completo',
-      'Una red abierta que puedes dejar en cualquier momento, con todo intacto',
     ],
     closing: [
       'Tú eliges lo que importa. Tú eliges cómo experimentarlo.',
