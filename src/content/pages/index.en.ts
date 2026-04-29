@@ -50,7 +50,7 @@ export default {
       'Posts you share with a circle are encrypted on your device before they leave it. Only the people you trust hold the keys to decrypt them.',
       'Not advertisers. Not AI. Not governments. <em>No one else.</em> Not even us.',
     ],
-    closer: 'Cryptography, not policy. The math is the promise.',
+    closer: 'Privacy by design. Not by promise.',
     image: {
       src: '/images/screenshots/private-network.webp',
       alt: "Penrose's Private Network screen on iPhone, explaining end-to-end encryption.",
