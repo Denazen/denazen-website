@@ -59,10 +59,26 @@ const img = (p: string) => localizeAsset(p, lang);
   </div>
 </section>
 
-<!-- What Penrose Is -->
+<!-- Privacy -->
 <section class="section-tint home-prose">
   <div class="container">
     <div class="home-grid">
+      <div class="home-text">
+        <h2>{c.privacy.heading}</h2>
+        {c.privacy.paragraphs.map((p) => <p set:html={p} />)}
+        <p class="home-prose-closer">{c.privacy.closer}</p>
+      </div>
+      <div class="home-visual">
+        <img src={img(c.privacy.image.src)} alt={c.privacy.image.alt} width="560" height="1112" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- What Penrose Is -->
+<section class="home-prose">
+  <div class="container">
+    <div class="home-grid reversed">
       <div class="home-text">
         <h2>{c.whatPenrose.heading}</h2>
         {c.whatPenrose.paragraphs.map((p) => <p set:html={p} />)}
@@ -73,22 +89,6 @@ const img = (p: string) => localizeAsset(p, lang);
       </div>
       <div class="home-visual">
         <img src={img(c.whatPenrose.image.src)} alt={c.whatPenrose.image.alt} width="560" height="1112" />
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Privacy -->
-<section class="home-prose">
-  <div class="container">
-    <div class="home-grid reversed">
-      <div class="home-text">
-        <h2>{c.privacy.heading}</h2>
-        {c.privacy.paragraphs.map((p) => <p set:html={p} />)}
-        <p class="home-prose-closer">{c.privacy.closer}</p>
-      </div>
-      <div class="home-visual">
-        <img src={img(c.privacy.image.src)} alt={c.privacy.image.alt} width="560" height="1112" />
       </div>
     </div>
   </div>
