@@ -5,16 +5,14 @@ export default {
       'A social network built for real relationships—with private spaces, real control, and no ads or tracking.',
   },
   hero: {
-    heading: 'Social media, without compromise.',
+    heading: 'The future of social.',
+    linesBefore: ['Privacy like Signal.'],
     rotator: {
       prefix: 'Connection like <em>early</em> ',
       words: ['Facebook', 'Instagram'],
       suffix: '.',
     },
-    lines: [
-      'Privacy like Signal.',
-      'Control and freedom of Bluesky.',
-    ],
+    linesAfter: ['Freedom of Bluesky.'],
     tagline: ['The impossible triangle. Solved.'],
     waitlistButton: 'Request invite',
     waitlistNote: 'Invite-only beta launching soon. Help shape the future of social.',

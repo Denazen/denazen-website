@@ -19,6 +19,12 @@ const img = (p: string) => localizeAsset(p, lang);
       <div class="home-text">
         <h1 set:html={c.hero.heading}></h1>
         <p class="home-hero-lines">
+          {c.hero.linesBefore.map((line) => (
+            <>
+              <Fragment set:html={line} />
+              <br />
+            </>
+          ))}
           <span class="home-hero-rotator-line">
             <Fragment set:html={c.hero.rotator.prefix} /><span class="word-rotator">
               {c.hero.rotator.words.map((w, i) => (
@@ -26,11 +32,10 @@ const img = (p: string) => localizeAsset(p, lang);
               ))}
             </span><Fragment set:html={c.hero.rotator.suffix} />
           </span>
-          <br />
-          {c.hero.lines.map((line, i) => (
+          {c.hero.linesAfter.map((line) => (
             <>
-              {line}
-              {i < c.hero.lines.length - 1 && <br />}
+              <br />
+              <Fragment set:html={line} />
             </>
           ))}
         </p>
