@@ -76,4 +76,10 @@ const linkClass = (link: { mobileOnly?: boolean }, active: boolean) =>
     const open = nav?.classList.toggle('open');
     toggle.setAttribute('aria-expanded', String(!!open));
   });
+  nav?.addEventListener('click', (e) => {
+    if (!(e.target instanceof Element)) return;
+    if (!e.target.closest('a')) return;
+    nav.classList.remove('open');
+    toggle?.setAttribute('aria-expanded', 'false');
+  });
 </script>
