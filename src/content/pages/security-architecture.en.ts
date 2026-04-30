@@ -773,6 +773,15 @@ Deliver sealed envelope
             "Each row's payload is a two-layer envelope adapted from Signal's sealed-sender construction to a post-quantum KEM. It carries two independent guarantees: the outer layer hides the sender from the server; the inner layer authenticates the sender to the recipient.",
         },
         {
+          kind: 'figure',
+          src: '/images/diagram-sealed-sender-envelope.svg',
+          alt: "Side-by-side diagram of the sealed-sender envelope's two layers. Layer 1 (left) hides sender identity from the server: ML-KEM-1024 encapsulation against the recipient's public key produces a shared secret, HKDF-SHA256 derives three sub-keys (K_id, K_oob, K_l2_salt), and the sender's identity and a per-envelope OOB_VAL are wrapped under the first two. K_l2_salt feeds Layer 2's HKDF salt. Layer 2 (right) authenticates the sender to the recipient: HKDF-SHA256, keyed by either the per-contact messaging key (established contacts) or the per-envelope OOB_VAL (first contact) and salted by Layer 1, derives K_inner, which encrypts the inner payload (message body and type discriminator) under XSalsa20-Poly1305.",
+          caption:
+            'Figure 3. Sealed-sender envelope. Layer 1 hides the sender from the server; Layer 2 authenticates the sender to the recipient. K_l2_salt links the two layers so any tampering with Layer 1 invalidates Layer 2.',
+          width: 1100,
+          height: 580,
+        },
+        {
           kind: 'p',
           html:
             "<strong>Layer 1 — hide sender identity from the server.</strong> The sender encapsulates against the recipient's ML-KEM-1024 public key, producing a shared secret known only to sender and recipient. HKDF-SHA256 derives three sub-keys, salted by hashes of the recipient's public key and the KEM ciphertext (domain separation). Two of those sub-keys wrap (a) the sender's claimed identity and (b) a per-envelope random value (<code>OOB_VAL</code>). The third feeds into Layer 2's salt so any tampering with Layer 1 invalidates Layer 2.",

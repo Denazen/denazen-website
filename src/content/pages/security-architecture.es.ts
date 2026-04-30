@@ -770,6 +770,15 @@ Entregar sobre sellado
             'La carga útil de cada fila es un sobre de dos capas adaptado de la construcción sealed-sender de Signal a un KEM post-cuántico. Conlleva dos garantías independientes: la capa externa oculta al remitente del servidor; la capa interna autentica al remitente ante el destinatario.',
         },
         {
+          kind: 'figure',
+          src: '/images/diagram-sealed-sender-envelope.svg',
+          alt: 'Diagrama lado a lado de las dos capas del sobre de remitente sellado. La Capa 1 (izquierda) oculta la identidad del remitente al servidor: la encapsulación ML-KEM-1024 contra la llave pública del destinatario produce un secreto compartido; HKDF-SHA256 deriva tres sub-llaves (K_id, K_oob, K_l2_salt), y la identidad del remitente y un OOB_VAL por sobre se envuelven bajo las dos primeras. K_l2_salt alimenta la sal del HKDF de la Capa 2. La Capa 2 (derecha) autentica al remitente ante el destinatario: HKDF-SHA256, con llave o bien la llave de mensajería por contacto (contactos establecidos) o bien el OOB_VAL por sobre (primer contacto) y con sal de la Capa 1, deriva K_inner, que cifra la carga útil interna (cuerpo del mensaje y discriminador de tipo) bajo XSalsa20-Poly1305.',
+          caption:
+            'Figura 3. Sobre de remitente sellado. La Capa 1 oculta al remitente del servidor; la Capa 2 autentica al remitente ante el destinatario. K_l2_salt vincula las dos capas, de modo que cualquier manipulación de la Capa 1 invalida la Capa 2.',
+          width: 1100,
+          height: 580,
+        },
+        {
           kind: 'p',
           html:
             '<strong>Capa 1 — ocultar la identidad del remitente al servidor.</strong> El remitente encapsula contra la llave pública ML-KEM-1024 del destinatario, produciendo un secreto compartido conocido solo por el remitente y el destinatario. HKDF-SHA256 deriva tres sub-llaves, con sal a partir de hashes de la llave pública del destinatario y del texto cifrado del KEM (separación de dominios). Dos de esas sub-llaves envuelven (a) la identidad declarada del remitente y (b) un valor aleatorio por sobre (<code>OOB_VAL</code>). La tercera alimenta la sal de la Capa 2, de modo que cualquier manipulación de la Capa 1 invalida la Capa 2.',

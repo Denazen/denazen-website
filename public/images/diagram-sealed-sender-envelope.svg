@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 580" role="img" aria-label="Side-by-side diagram of the sealed-sender envelope's two layers. Layer 1 (left) hides sender identity from the server: ML-KEM-1024 encapsulation against the recipient's public key produces a shared secret, HKDF-SHA256 derives three sub-keys (K_id, K_oob, K_l2_salt), and the sender's identity and a per-envelope OOB_VAL are wrapped under the first two. K_l2_salt feeds Layer 2's HKDF salt. Layer 2 (right) authenticates the sender to the recipient: HKDF-SHA256, keyed by either the per-contact messaging key (established contacts) or the per-envelope OOB_VAL (first contact) and salted by Layer 1, derives K_inner, which encrypts the inner payload (message body and type discriminator) under XSalsa20-Poly1305.">
+  <defs>
+    <style>
+      .box-outer { fill: #ffffff; stroke: #2884E0; stroke-width: 2; }
+      .box-accent { fill: #F1F3F5; stroke: #2884E0; stroke-width: 1.6; }
+      .box-records { fill: #D9EBFF; stroke: #2884E0; stroke-width: 1.6; }
+      .arrow { stroke: #2884E0; stroke-width: 1.8; fill: none; }
+      .arrow-dashed { stroke: #2884E0; stroke-width: 1.5; fill: none; stroke-dasharray: 5 4; }
+      .lbl-section { font: 700 13px/1.2 Inter, sans-serif; fill: #2884E0; letter-spacing: 0.06em; }
+      .lbl-sub { font: 400 12px/1.3 Inter, sans-serif; fill: #4b5563; }
+      .lbl-body { font: 500 13px/1.4 Inter, sans-serif; fill: #111827; }
+      .lbl-op { font: 400 12px/1.2 'JetBrains Mono', ui-monospace, monospace; fill: #2884E0; }
+      .lbl-key { font: 600 13px/1.2 'JetBrains Mono', ui-monospace, monospace; fill: #111827; }
+      .lbl-tag { font: 500 11px/1.2 Inter, sans-serif; fill: #111827; }
+      .lbl-foot { font: 400 12px/1.5 Inter, sans-serif; fill: #4b5563; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2884E0"/>
+    </marker>
+  </defs>
+
+  <!-- ===== LAYER 1 (left column) ===== -->
+
+  <rect x="30" y="20" width="510" height="60" rx="8" class="box-outer"/>
+  <text x="285" y="46" text-anchor="middle" class="lbl-section">LAYER 1 — OUTER ENVELOPE</text>
+  <text x="285" y="66" text-anchor="middle" class="lbl-sub">Hides sender identity from the server</text>
+
+  <!-- Input: recipient pubkey -->
+  <rect x="80" y="100" width="410" height="44" rx="6" class="box-accent"/>
+  <text x="285" y="128" text-anchor="middle" class="lbl-body">Recipient ML-KEM-1024 public key</text>
+
+  <line x1="285" y1="146" x2="285" y2="180" class="arrow" marker-end="url(#arrow)"/>
+  <text x="295" y="167" class="lbl-op">ml_kem1024.encapsulate</text>
+
+  <!-- Shared secret -->
+  <rect x="180" y="184" width="210" height="36" rx="6" class="box-accent"/>
+  <text x="285" y="207" text-anchor="middle" class="lbl-key">shared_secret</text>
+
+  <line x1="285" y1="222" x2="285" y2="258" class="arrow" marker-end="url(#arrow)"/>
+  <text x="295" y="240" class="lbl-op">HKDF-SHA256 · salt = H(pubkey) ‖ H(ct)</text>
+
+  <!-- Three sub-keys row -->
+  <rect x="55" y="262" width="140" height="42" rx="6" class="box-records"/>
+  <text x="125" y="278" text-anchor="middle" class="lbl-tag">sub-key</text>
+  <text x="125" y="296" text-anchor="middle" class="lbl-key">K_id</text>
+
+  <rect x="205" y="262" width="140" height="42" rx="6" class="box-records"/>
+  <text x="275" y="278" text-anchor="middle" class="lbl-tag">sub-key</text>
+  <text x="275" y="296" text-anchor="middle" class="lbl-key">K_oob</text>
+
+  <rect x="355" y="262" width="160" height="42" rx="6" class="box-records"/>
+  <text x="435" y="278" text-anchor="middle" class="lbl-tag">sub-key</text>
+  <text x="435" y="296" text-anchor="middle" class="lbl-key">K_l2_salt</text>
+
+  <!-- Arrows down from K_id and K_oob -->
+  <line x1="125" y1="304" x2="125" y2="334" class="arrow" marker-end="url(#arrow)"/>
+  <line x1="275" y1="304" x2="275" y2="334" class="arrow" marker-end="url(#arrow)"/>
+
+  <!-- Wrapped payload -->
+  <rect x="55" y="338" width="290" height="62" rx="6" class="box-accent"/>
+  <text x="200" y="358" text-anchor="middle" class="lbl-body">wraps:</text>
+  <text x="200" y="376" text-anchor="middle" class="lbl-sub">• sender's claimed identity (encrypted)</text>
+  <text x="200" y="392" text-anchor="middle" class="lbl-sub">• OOB_VAL (encrypted)</text>
+
+  <!-- Footer text -->
+  <text x="285" y="438" text-anchor="middle" class="lbl-foot">What the server sees: opaque KEM</text>
+  <text x="285" y="456" text-anchor="middle" class="lbl-foot">ciphertext + opaque blobs. No DID at any</text>
+  <text x="285" y="474" text-anchor="middle" class="lbl-foot">layer. Two envelopes from the same sender</text>
+  <text x="285" y="492" text-anchor="middle" class="lbl-foot">are ciphertext-indistinguishable.</text>
+
+  <!-- ===== LAYER 2 (right column) ===== -->
+
+  <rect x="560" y="20" width="510" height="60" rx="8" class="box-outer"/>
+  <text x="815" y="46" text-anchor="middle" class="lbl-section">LAYER 2 — INNER ENVELOPE</text>
+  <text x="815" y="66" text-anchor="middle" class="lbl-sub">Authenticates sender to recipient</text>
+
+  <!-- Input: messaging key OR OOB_VAL -->
+  <rect x="610" y="100" width="410" height="84" rx="6" class="box-accent"/>
+  <text x="815" y="124" text-anchor="middle" class="lbl-body">Per-contact messaging key</text>
+  <text x="815" y="142" text-anchor="middle" class="lbl-sub">(established contact)</text>
+  <text x="815" y="161" text-anchor="middle" class="lbl-sub" font-style="italic">— or —</text>
+  <text x="815" y="178" text-anchor="middle" class="lbl-sub">Per-envelope OOB_VAL (first contact)</text>
+
+  <line x1="815" y1="186" x2="815" y2="222" class="arrow" marker-end="url(#arrow)"/>
+  <text x="825" y="208" class="lbl-op">HKDF-SHA256 · salt fed by Layer 1</text>
+
+  <!-- K_inner -->
+  <rect x="710" y="226" width="210" height="36" rx="6" class="box-records"/>
+  <text x="815" y="249" text-anchor="middle" class="lbl-key">K_inner</text>
+
+  <line x1="815" y1="264" x2="815" y2="298" class="arrow" marker-end="url(#arrow)"/>
+  <text x="825" y="284" class="lbl-op">XSalsa20-Poly1305</text>
+
+  <!-- Inner payload -->
+  <rect x="610" y="302" width="410" height="60" rx="6" class="box-accent"/>
+  <text x="815" y="326" text-anchor="middle" class="lbl-body">Sealed inner payload</text>
+  <text x="815" y="346" text-anchor="middle" class="lbl-sub">message body • type discriminator • …</text>
+
+  <!-- Footer text -->
+  <text x="815" y="394" text-anchor="middle" class="lbl-foot">What the recipient checks: tries the stored</text>
+  <text x="815" y="412" text-anchor="middle" class="lbl-foot">messaging key for the claimed sender. If it</text>
+  <text x="815" y="430" text-anchor="middle" class="lbl-foot">opens, bind. Else fall back to OOB_VAL</text>
+  <text x="815" y="448" text-anchor="middle" class="lbl-foot">(first-contact path). An impostor under the</text>
+  <text x="815" y="466" text-anchor="middle" class="lbl-foot">established-contact path can't produce an</text>
+  <text x="815" y="484" text-anchor="middle" class="lbl-foot">envelope that opens.</text>
+
+  <!-- ===== Bridge: K_l2_salt feeds Layer 2's HKDF salt ===== -->
+  <path d="M 515 283 C 555 283, 555 208, 595 208 L 800 208" class="arrow-dashed" marker-end="url(#arrow)"/>
+  <text x="552" y="245" class="lbl-op" font-size="11">salt feed</text>
+
+  <!-- Top-of-diagram caption strip linking the two layers -->
+  <text x="550" y="540" text-anchor="middle" class="lbl-foot" font-style="italic">Tampering with Layer 1 changes K_l2_salt, which invalidates Layer 2.</text>
+</svg>
