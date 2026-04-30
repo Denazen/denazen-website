@@ -90,16 +90,17 @@ const content: {
     {
       kind: 'p',
       html:
-        '<strong>Penrose targets a zero-trust content model.</strong> No server, infrastructure provider, or Penrose developer can read plaintext content or key material, and no network attacker — including a compromised Personal Data Server (PDS) — can substitute keys undetected.',
+        "Penrose is a privacy-first social client built on the AT Protocol — the open network that powers Bluesky. It pairs public Bluesky-network posts with private posts, direct messages, and circle-shared content that are end-to-end encrypted on the user's device before they touch any server.",
     },
-    { kind: 'p', html: 'Three properties underpin this guarantee:' },
     {
-      kind: 'ol',
-      items: [
-        '<strong>Separate encryption password.</strong> The vault key hierarchy is derived from an encryption password that is never sent to Bluesky or any other server.',
-        "<strong>Trust-On-First-Use (TOFU) key binding.</strong> A contact's post-quantum public key is fingerprinted and bound on the first exchange. All subsequent exchanges are checked against the bound fingerprint; a PDS operator who later substitutes the key is detected. First-contact verification via safety numbers / QR code is planned to close the residual first-exchange window — see the Future Work section.",
-        "<strong>Sealed-sender inbox.</strong> Inbox messages — friend requests, circle-key shares, acceptances, and direct messages — travel as two-layer sealed envelopes. The outer layer hides the sender's identity from the inbox server entirely. The inner layer authenticates the sender to the recipient using a key the server cannot derive. A PDS operator who substitutes a contact's public key after first contact is detected; one who attempts to impersonate an established contact in the inbox is rejected when the recipient opens the envelope.",
-      ],
+      kind: 'p',
+      html:
+        "This page describes the encryption architecture: the key hierarchy, the cryptographic primitives, the inbox and key-exchange protocols, and the threat model the design is built to hold against. It is written for a technical audience — security engineers, cryptographers, and developers evaluating Penrose's privacy guarantees.",
+    },
+    {
+      kind: 'p',
+      html:
+        '<strong>Core claim.</strong> Penrose targets a zero-trust content model. No server, infrastructure provider, or Penrose developer can read plaintext content or key material, and no network attacker — including a compromised Personal Data Server (PDS) — can substitute keys undetected. §1.4 states the exact scope of this claim.',
     },
     { kind: 'hr' },
   ],

@@ -87,16 +87,17 @@ const content: {
     {
       kind: 'p',
       html:
-        '<strong>Penrose apunta a un modelo de contenido de confianza cero.</strong> Ningún servidor, proveedor de infraestructura o desarrollador de Penrose puede leer contenido en texto plano o material de llaves, y ningún atacante de red — incluido un Personal Data Server (PDS) comprometido — puede sustituir llaves sin ser detectado.',
+        'Penrose es un cliente social centrado en la privacidad construido sobre el AT Protocol — la red abierta que impulsa Bluesky. Combina publicaciones públicas en la red de Bluesky con publicaciones privadas, mensajes directos y contenido compartido en círculo que se cifran de extremo a extremo en el dispositivo del usuario antes de tocar cualquier servidor.',
     },
-    { kind: 'p', html: 'Tres propiedades sustentan esta garantía:' },
     {
-      kind: 'ol',
-      items: [
-        '<strong>Contraseña de cifrado independiente.</strong> La jerarquía de llaves de la bóveda se deriva de una contraseña de cifrado que nunca se envía a Bluesky ni a ningún otro servidor.',
-        '<strong>Vinculación de llaves Trust-On-First-Use (TOFU).</strong> La llave pública post-cuántica de un contacto se identifica mediante huella y se vincula en el primer intercambio. Todos los intercambios posteriores se comprueban contra la huella vinculada; un operador de PDS que luego sustituya la llave es detectado. Está prevista la verificación de primer contacto mediante números de seguridad / código QR para cerrar la ventana residual del primer intercambio — consulta la sección de Trabajo futuro.',
-        '<strong>Inbox de remitente sellado.</strong> Los mensajes del inbox — solicitudes de amistad, comparticiones de llaves de círculo, aceptaciones y mensajes directos — viajan como sobres sellados de dos capas. La capa externa oculta por completo la identidad del remitente al servidor del inbox. La capa interna autentica al remitente ante el destinatario mediante una llave que el servidor no puede derivar. Un operador de PDS que sustituya la llave pública de un contacto después del primer contacto es detectado; uno que intente impersonar a un contacto establecido en el inbox es rechazado cuando el destinatario abre el sobre.',
-      ],
+      kind: 'p',
+      html:
+        'Esta página describe la arquitectura de cifrado: la jerarquía de llaves, las primitivas criptográficas, los protocolos del inbox y de intercambio de llaves, y el modelo de amenazas que el diseño está construido para resistir. Está escrita para una audiencia técnica — ingenieros de seguridad, criptógrafos y desarrolladores que evalúan las garantías de privacidad de Penrose.',
+    },
+    {
+      kind: 'p',
+      html:
+        '<strong>Afirmación central.</strong> Penrose apunta a un modelo de contenido de confianza cero. Ningún servidor, proveedor de infraestructura o desarrollador de Penrose puede leer contenido en texto plano o material de llaves, y ningún atacante de red — incluido un Personal Data Server (PDS) comprometido — puede sustituir llaves sin ser detectado. §1.4 establece el alcance exacto de esta afirmación.',
     },
     { kind: 'hr' },
   ],
